@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="color.css?v=11" id="colorStyle">
+    <link rel="stylesheet" href="font.css?v=11" id="fontStyle">
+    <title>拎包报表</title>
+    <style data-msg="整体">
+        @font-face {
+            font-family: "otf";
+            src: url('font-face-custom.otf?t=1510890772899') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .is-num {
+            font-family: 'otf', "Microsoft YaHei", sans-serif;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+
+    </style>
+    <style data-msg="拎包业务">
+        .main-warp {
+            background-color: var(--backgroundcolor);
+        }
+
+        /*主要*/
+        .normal-padding {
+            padding: .34rem .42rem;
+        }
+
+        /*第一个tab*/
+        .main-tab {
+            overflow: hidden;
+            border-radius: 1111px;
+            display: flex;
+            justify-content: space-around;
+            margin: .20rem 0 .30rem;
+            line-height: 0.6rem;
+        }
+
+        .main-tab .main-item {
+            width: 100%;
+            background-color: var(--main-item);
+            color: var(--font-grey);
+        }
+
+
+        /*被选中的tab*/
+        .main-item.active-tab {
+            background-color: var(--active-tab);
+            color: var(--high-light-color);
+            font-size: 0.3rem;
+        }
+
+        /*最新进展*/
+        .latest-progress {
+            color: var(--high-light-color);
+            display: flex;
+            justify-content: space-between;
+            padding: .20rem .30rem;
+        }
+
+        /*最新进展*/
+        .latest-progress-msg {
+            border-radius: 0.08rem;
+            background-color: var(--main-item);
+            color: var(--font-grey);
+        }
+
+        .latest-progress-item {
+            margin: 0 0.3rem;
+            display: flex;
+            justify-content: space-between;
+            line-height: 0.84rem;
+        }
+
+        .latest-progress-item:first-child {
+            border-bottom: 0.005rem solid var(--thin-border);
+        }
+
+        .latest-progress-item > span {
+            max-width: 5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .latest-progress-item > span:last-child {
+            color: var(--858081);
+        }
+
+
+    </style>
+    <style data-msg="拎包整体">
+        .bag-as-whole {
+            padding-top: 0.24rem;
+        }
+
+        .bag-as-whole-ul {
+            display: flex;
+            justify-content: space-around;
+            width: 6rem;
+            color: var(--font-grey);
+            line-height: 2.7em;
+            margin-left: .02rem;
+        }
+
+        .bag-as-whole-item {
+            font-weight: lighter;
+        }
+
+        .bag-as-whole-item.active-tab {
+            color: var(--active-tab);
+            font-weight: bold;
+            font-size: 0.3rem;
+            position: relative;
+        }
+
+        .bag-as-whole-item.active-tab::after {
+            display: block;
+            content: '';
+            width: 50%;
+            position: absolute;
+            height: 0.03rem;
+            background-color: var(--active-tab);
+            left: 25%;
+            bottom: -0.01rem;
+        }
+
+        /*拎包整体的分割线*/
+        .bag-as-whole-hr {
+            border: none;
+            border-bottom: 0.01rem solid var(--thin-border);
+        }
+
+        /*这是一个整体结构*/
+        .basic-list-struct {
+            display: flex;
+            justify-content: space-between;
+            color: var(--font-grey);
+            padding: 0.38rem 0 0.32rem;
+            height: 0.65rem;
+            border-bottom: 0.01rem solid var(--494445);
+        }
+
+
+        /*整体li的右面，是个span，里面是数字*/
+        .basic-list-struct > span {
+            line-height: 0.7rem;
+        }
+
+        /*拎包概况*/
+        .basic-list-struct > div > div:first-child {
+            line-height: 0.3rem;
+            padding-bottom: 0.08rem;
+        }
+
+        /*拎包概况截至日*/
+        .basic-list-struct > div > div:last-child {
+            color: var(--858081);
+            line-height: 0.28rem;
+        }
+
+        /*昨日概况*/
+        .situation-yesterday-general {
+
+        }
+    </style>
+
+
+    <style>
+        /*日期选择样式*/
+        .select-date {
+            width: 1.4rem;
+            line-height: 0.36rem;
+            height: 0.36rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 0.04rem;
+            overflow-x: hidden;
+        }
+
+        /*日期打开的样式*/
+        .select-date-open {
+            height: auto;
+        }
+
+        /*默认日期*/
+        .default-date {
+            justify-content: space-around;
+            display: flex;
+            flex-direction: row;
+            height: 0.36rem;
+            padding: 0 0.06rem;
+        }
+
+        .default-date * {
+            display: flex;
+            align-items: center;
+        }
+
+        .default-date img:first-child {
+            width: 0.26rem;
+        }
+
+        .default-date img:last-child {
+            width: 0.12rem;
+        }
+
+        /*选择时间下拉*/
+        .select-date ul {
+            text-indent: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="main-warp" onclick="location.reload(true);">
+    <section class="normal-padding">
+        <ul class="main-tab text-center font13">
+            <li class="main-item active-tab">拎包业务</li>
+            <li class="main-item">会员业务</li>
+            <li class="main-item">打造师</li>
+        </ul>
+        <p class="latest-progress font12"><span>最新进展</span><span>• • •</span></p>
+        <ul class="latest-progress-msg font11">
+            <li class="latest-progress-item"><span>几iowafjoihgioafo我告我放假额爱后方很平稳几iowafjoihgioafo我告我放假额爱后方很平稳</span><span
+                    class="font10">一小时前</span>
+            </li>
+            <li class="latest-progress-item"><span>广州蔷薇花园昨天</span><span class="font10">一小时前</span></li>
+        </ul>
+    </section>
+    <section class="bag-as-whole" style="display: none">
+        <ul class="bag-as-whole-ul font13">
+            <li class="bag-as-whole-item active-tab">拎包整体</li>
+            <li class="bag-as-whole-item">营销环节</li>
+            <li class="bag-as-whole-item">打造师环节</li>
+        </ul>
+        <hr class="bag-as-whole-hr">
+        <div class="normal-padding" style="padding-left: 0.46rem;">
+            <div class="basic-list-struct font14">
+                <div class="pack-profile-text">
+                    <div class="font14 cFFFFFF">拎包概况</div>
+                    <div class="font10 is-num">截止2020/20/20 20:32</div>
+                </div>
+                <span class="font10">？数据说明</span>
+            </div>
+            <ul class="situation-yesterday-general font12">
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num ">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数
+                            <span class="c373233 is-num">/万元</span>
+                        </div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num ">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数
+                            <span class="c373233 is-num">/万元</span>
+                        </div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="normal-padding">
+        地图
+    </section>
+    <section class="normal-padding">
+        <p class="cFFFFFF font16" style="padding-left: 0.02rem;padding-bottom:0.28rem">全国整体</p>
+        <div class="cE8E5E6 font13" style=";position:relative;">
+            <span>房屋认购数、拎包认购数及转化率</span>
+            <div class="select-date">
+                <div class="default-date b494345">
+                    <img src="./icon/calendar.svg" alt="">
+                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <img src="./icon/calendar.svg" alt="">
+                </div>
+                <ul class="cC5BCBE b494345 font10">
+                    <li>按日</li>
+                    <li>按月</li>
+                    <li class="b403B3D">按周</li>
+                    <li>3023年</li>
+                </ul>
+            </div>
+        </div>
+        <p class="c858081 font10" style="padding-top: 0.05rem;">(拎包认购数/房屋认购数)</p>
+
+    </section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+    <section class="normal-padding"></section>
+</div>
+
+<script>
+    console.log(colorStyle);
+    colorStyle.href = `color.css?v=${Math.random()}`;
+    fontStyle.href = `font.css?v=${Math.random()}`;
+</script>
+<script>
+    ;(function (doc, win, undefined) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (clientWidth === undefined) return;
+                docEl.style.fontSize = clientWidth / 7.50 + 'px';
+                console.log(docEl.style.fontSize);
+            };
+        if (doc.addEventListener === undefined) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+    })(document, window);
+</script>
+<script src="./zepto/zepto.v1.2.0.min.js"></script>
+<script>
+    //  日期选择
+    const $selectDate = $('.select-date');
+    //  日期选择的ul
+    const $selectDateUl = $selectDate.find('ul');
+    $selectDateUl.on('click', function (e) {
+        const $this = $(this);
+        const $parents = $this.parents();
+        $parents.removeClass('select-date-open');
+        e.stopPropagation();
+        const $target = $(e.target);
+        // debugger
+        $parents.find('.current-date').text($target.text());
+        $this.find('.b403B3D').removeClass('b403B3D');
+        $target.addClass('b403B3D');
+    });
+    //  日期选择的默认位置
+    const $defaultDate = $selectDate.find('.default-date');
+    $defaultDate.on('click', function (e) {
+        $(this).parents().addClass('select-date-open');
+        e.stopPropagation();
+    });
+</script>
+</body>
+</html>

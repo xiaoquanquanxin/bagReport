@@ -1,0 +1,76 @@
+:root {
+    --backgroundcolor: #312D2E;
+
+    --thin-border: #675E61;
+
+    --main-item: #3E393B;
+    --font-grey: #B6B0B0;
+
+    --active-tab: #FF626F;
+    --high-light-color: #FFFFFF;
+
+    /*数据说明*/
+    /*拎包认购数/房屋认购数*/
+    --858081: #858081;
+
+    /*昨日房屋认购数量*/
+    --FFFDFD: #FFFDFD;
+
+    /*历史累计数值*/
+    --FF6C78: #FF6C78;
+
+    /*拎包整体border-bottom*/
+    --494445: #494445;
+
+    /*拎包概况里的单位*/
+    --373233: red;
+
+    /*房屋认购数、拎包认购数及转化率*/
+    --E8E5E6: #E8E5E6;
+
+
+    /*选择时间样式*/
+    --494345: #494345;
+    /*选择时间字体颜色*/
+    --C5BCBE: #C5BCBE;
+    /*被选择时间背景色*/
+    --403B3D: #403B3D;
+}
+
+
+/*c开头的，是color，b开头的，是backgrond-color*/
+.c858081 {
+    color: var(--858081);
+}
+
+.cFFFFFF {
+    color: var(--high-light-color);
+}
+
+.cFF6C78 {
+    color: var(--FF6C78);
+}
+
+.cFFFDFD {
+    color: var(--FFFDFD);
+}
+
+.c373233 {
+    color: var(--373233);
+}
+
+.cE8E5E6 {
+    color: var(--E8E5E6);
+}
+
+.cC5BCBE {
+    color: var(--C5BCBE);
+}
+
+.b494345 {
+    background-color: var(--494345);
+}
+
+.b403B3D {
+    background-color: var(--403B3D);
+}

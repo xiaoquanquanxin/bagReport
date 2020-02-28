@@ -3,7 +3,7 @@
     font-size: .66rem;
 }
 
-.font32{
+.font32 {
     font-size: .64rem;
 }
 
@@ -37,4 +37,8 @@
 
 .font10 {
     font-size: .20rem;
+}
+
+.font9 {
+    font-size: .18rem;
 }

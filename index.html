@@ -32,6 +32,9 @@
             text-align: center;
         }
 
+        html {
+            color: orange;
+        }
 
     </style>
     <style data-msg="拎包业务">
@@ -56,7 +59,7 @@
 
         .main-tab .main-item {
             width: 100%;
-            background-color: var(--main-item);
+            background-color: var(--3E393B);
             color: var(--font-grey);
         }
 
@@ -64,13 +67,13 @@
         /*被选中的tab*/
         .main-item.active-tab {
             background-color: var(--active-tab);
-            color: var(--high-light-color);
+            color: var(--FFFFFF);
             font-size: 0.3rem;
         }
 
         /*最新进展*/
         .latest-progress {
-            color: var(--high-light-color);
+            color: var(--FFFFFF);
             display: flex;
             justify-content: space-between;
             padding: .20rem .30rem;
@@ -79,7 +82,6 @@
         /*最新进展*/
         .latest-progress-msg {
             border-radius: 0.08rem;
-            background-color: var(--main-item);
             color: var(--font-grey);
         }
 
@@ -181,6 +183,11 @@
         .situation-yesterday-general {
 
         }
+
+        .question-mark {
+            width: 0.16rem;
+            margin-right: 0.04rem;
+        }
     </style>
 
 
@@ -194,7 +201,7 @@
             top: 0;
             right: 0;
             border-radius: 0.04rem;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         /*日期打开的样式*/
@@ -229,6 +236,100 @@
             text-indent: 0.5rem;
         }
     </style>
+
+    <style data-msg="条形统计图的tab">
+        .bar-chart-control {
+            display: flex;
+        }
+
+        .bar-chart-control > div {
+            border: 0.01rem solid var(--524E4F);
+            color: var(--AEA6A8);
+            border-radius: 0.06rem;
+            padding: 0.08rem 0.22rem;
+            text-align: justify;
+            margin-right: 0.2rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .bar-chart-control.w17 > div {
+            width: 1.9rem;
+        }
+
+        .bar-chart-control.w14 > div {
+            width: 1.6rem;
+        }
+
+        .bar-chart-control.w13 > div {
+            width: 1.5rem;
+        }
+
+        .bar-chart-control > div.active-bar-chart {
+            border: 0.01rem solid var(--6A6464);
+            color: var(--FFFDFD);
+            background-color: var(--4A4647);
+        }
+    </style>
+
+    <style data-msg="竖型统计图，各套包毛利占比">
+        .gross-profit-ratio-package {
+            display: flex;
+            height: 2rem;
+            margin: 0.6rem 0;
+        }
+
+        .gross-profit-ratio-package > div {
+            margin-right: 0.02rem;
+            min-width: 12%;
+            white-space: nowrap;
+        }
+
+        /*.gross-profit-ratio-package > div:first-child {*/
+        /*    */
+        /*}*/
+
+        /*.gross-profit-ratio-package > div:last-child {*/
+        /**/
+        /*}*/
+
+        .gross-profit-ratio-package h4 {
+            margin-left: 0.16rem;
+            margin-top: 0.28rem;
+            line-height: 0.26rem;
+        }
+
+        .gross-profit-ratio-package p {
+            margin-left: 0.16rem;
+            margin-top: 0.38rem;
+            line-height: 0.66rem;
+        }
+    </style>
+    <style data-msg="全国各项目情况">
+        table.national-projects {
+            width: 100%;
+            border-radius: 0.08rem;
+            margin-top: 0.28rem;
+        }
+
+        .national-projects thead {
+            height: 0.5rem;
+            line-height: 0.5rem;
+        }
+
+        .national-projects td {
+            border: none;
+        }
+
+        .national-projects tbody {
+            line-height: 0.9rem;
+        }
+
+        .national-projects tbody td {
+            border-bottom: 0.01rem solid var(--534C4E);
+        }
+
+    </style>
 </head>
 <body>
 <div class="main-warp" onclick="location.reload(true);">
@@ -239,14 +340,14 @@
             <li class="main-item">打造师</li>
         </ul>
         <p class="latest-progress font12"><span>最新进展</span><span>• • •</span></p>
-        <ul class="latest-progress-msg font11">
+        <ul class="latest-progress-msg bg3E393B font11">
             <li class="latest-progress-item"><span>几iowafjoihgioafo我告我放假额爱后方很平稳几iowafjoihgioafo我告我放假额爱后方很平稳</span><span
                     class="font10">一小时前</span>
             </li>
             <li class="latest-progress-item"><span>广州蔷薇花园昨天</span><span class="font10">一小时前</span></li>
         </ul>
     </section>
-    <section class="bag-as-whole" style="display: block">
+    <section class="bag-as-whole" style="display: none;">
         <ul class="bag-as-whole-ul font13">
             <li class="bag-as-whole-item active-tab">拎包整体</li>
             <li class="bag-as-whole-item">营销环节</li>
@@ -254,12 +355,12 @@
         </ul>
         <hr class="bag-as-whole-hr">
         <div class="normal-padding" style="padding-left: 0.46rem;">
-            <div class="basic-list-struct font14">
+            <div class="basic-list-struct">
                 <div class="pack-profile-text">
                     <div class="font14 cFFFFFF">拎包概况</div>
                     <div class="font10 is-num">截止2020/20/20 20:32</div>
                 </div>
-                <span class="font10">？数据说明</span>
+                <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
             </div>
             <ul class="situation-yesterday-general font12">
                 <li class="basic-list-struct">
@@ -337,44 +438,188 @@
         <div class="cE8E5E6 font13" style=";position:relative;">
             <span>房屋认购数、拎包认购数及转化率</span>
             <div class="select-date">
-                <div class="default-date b494345">
+                <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
                     <div class="cFFFFFF font10 current-date">请选择</div>
-                    <img src="./icon/calendar.svg" alt="">
+                    <img src="./icon/selectIcon.svg" alt="">
                 </div>
-                <ul class="cC5BCBE b494345 font10">
+                <ul class="cC5BCBE bg494345 font10">
                     <li>按日</li>
                     <li>按月</li>
-                    <li class="b403B3D">按周</li>
+                    <li class="bg403B3D">按周</li>
                     <li>3023年</li>
                 </ul>
             </div>
         </div>
         <p class="c858081 font10" style="padding-top: 0.05rem;">(拎包认购数/房屋认购数)</p>
-
+        <div data-msg="条形统计图tab">
+            <div>条形统计图</div>
+        </div>
+        <div class="bar-chart-control w17 font9">
+            <div class="active-bar-chart">房屋认购数、拎包认购数及转化率</div>
+            <div>拎包合同和拎包首款额</div>
+        </div>
     </section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
-    <section class="normal-padding"></section>
+    <section class="normal-padding">
+        <div class="cE8E5E6 font13" style=";position:relative;">
+            <span>各套包合同占比</span>
+            <div class="select-date">
+                <div class="default-date bg494345">
+                    <img src="./icon/calendar.svg" alt="">
+                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <img src="./icon/selectIcon.svg" alt="">
+                </div>
+                <ul class="cC5BCBE bg494345 font10">
+                    <li>按日</li>
+                    <li>按月</li>
+                    <li class="bg403B3D">按周</li>
+                    <li>3023年</li>
+                </ul>
+            </div>
+        </div>
+        <div data-msg="扇形统计图tab">
+            <div>扇形统计图</div>
+        </div>
+        <div class="bar-chart-control w14 font9">
+            <div class="active-bar-chart">各套包合同额占比</div>
+            <div>各组合套包购买人数占比</div>
+        </div>
+    </section>
+    <section class="bag-as-whole" style="display: none;">
+        <div class="normal-padding" style="padding-left: 0.46rem;">
+            <div class="basic-list-struct">
+                <div class="pack-profile-text">
+                    <div class="font13 cFFFFFF">拎包毛利<span class="font10 c858081">（以合同额预估）</span></div>
+                    <div class="font10 is-num">截止2020/20/20 20:32</div>
+                </div>
+                <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
+            </div>
+            <ul class="situation-yesterday-general font12">
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num ">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数
+                            <span class="c858081 is-num">/万元</span>
+                        </div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num ">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+                <li class="basic-list-struct">
+                    <div>
+                        <div class="font11 cFFFDFD">昨日房屋统计套数
+                            <span class="c858081 is-num">/万元</span>
+                        </div>
+                        <div class="font10">
+                            <span class="c858081">历史累计</span>
+                            <span class="cFF6C78 is-num">22488</span>
+                        </div>
+                    </div>
+                    <span class="font33 is-num cFFFFFF">4</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="normal-padding">
+        <div class="cE8E5E6 font13" style=";position:relative;">
+            <span>各套包毛利占比</span>
+            <div class="select-date">
+                <div class="default-date bg494345">
+                    <img src="./icon/calendar.svg" alt="">
+                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <img src="./icon/selectIcon.svg" alt="">
+                </div>
+                <ul class="cC5BCBE bg494345 font10">
+                    <li>按日</li>
+                    <li>按月</li>
+                    <li class="bg403B3D">按周</li>
+                    <li>3023年</li>
+                </ul>
+            </div>
+        </div>
+        <div data-msg="竖型统计图，各套包毛利占比" class="c191717 gross-profit-ratio-package" id="grossProfitRatioPackage">
+            <div class="bgEF5A66"><h4 class="font13">家私</h4>
+                <p class="is-num">43%</p></div>
+            <div class="bgF0A9AD"><h4 class="font12">家私</h4>
+                <p class="is-num">43%</p></div>
+            <div class="bgFCE3E9"><h4 class="font11">家私</h4>
+                <p class="is-num">43%</p></div>
+            <div class="bgFFFFFF"><h4 class="font10">家私</h4>
+                <p class="is-num">43%</p></div>
+        </div>
+        <div class="bar-chart-control w13 font9">
+            <div class="active-bar-chart">各套包毛利及毛利率</div>
+            <div>各套包毛利占比</div>
+            <div>整体毛利<br>毛利率趋势</div>
+        </div>
+    </section>
+
+    <section class="normal-padding">
+        <p class="font15 cFFFFFF">全国各项目情况</p>
+        <table class="national-projects text-center" cellspacing="0">
+            <thead class="cC8C1C3 font9 bg3E393B ">
+            <tr>
+                <th>项目</th>
+                <th>拎包套数</th>
+                <th>合同额/万元</th>
+                <th>实收额/万元</th>
+                <th>转化率</th>
+            </tr>
+            </thead>
+            <tbody class="cE8E5E6 font11 is-num">
+            <tr><td>广州常春藤</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+            <tr><td>中山京沪城</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+            <tr><td>遵义蔷薇国际</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+
+            </tbody>
+        </table>
+    </section>
     <section class="normal-padding"></section>
 </div>
 
 <script>
-    console.log(colorStyle);
     colorStyle.href = `color.css?v=${Math.random()}`;
     fontStyle.href = `font.css?v=${Math.random()}`;
 </script>
@@ -383,10 +628,9 @@
         var docEl = doc.documentElement,
             resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize',
             recalc = function () {
-                var clientWidth = docEl.clientWidth;
+                const clientWidth = docEl.clientWidth;
                 if (clientWidth === undefined) return;
                 docEl.style.fontSize = clientWidth / 7.50 + 'px';
-                console.log(docEl.style.fontSize);
             };
         if (doc.addEventListener === undefined) return;
         win.addEventListener(resizeEvt, recalc, false);
@@ -394,21 +638,23 @@
     })(document, window);
 </script>
 <script src="./zepto/zepto.v1.2.0.min.js"></script>
-<script>
+<script data-msg="日期选择">
     //  日期选择
     const $selectDate = $('.select-date');
     //  日期选择的ul
     const $selectDateUl = $selectDate.find('ul');
     $selectDateUl.on('click', function (e) {
         const $this = $(this);
-        const $parents = $this.parents();
-        $parents.removeClass('select-date-open');
+        const $parent = $this.parent();
+        $parent.removeClass('select-date-open');
         e.stopPropagation();
         const $target = $(e.target);
+        // console.log($parent);
+        // console.log($parent.find('.current-date'));
         // debugger
-        $parents.find('.current-date').text($target.text());
-        $this.find('.b403B3D').removeClass('b403B3D');
-        $target.addClass('b403B3D');
+        $parent.find('.current-date').text($target.text());
+        $this.find('.bg403B3D').removeClass('bg403B3D');
+        $target.addClass('bg403B3D');
     });
     //  日期选择的默认位置
     const $defaultDate = $selectDate.find('.default-date');
@@ -417,5 +663,57 @@
         e.stopPropagation();
     });
 </script>
+<script data-msg="各套包毛利占比">
+    const $grossProfitRatioPackage = $('#grossProfitRatioPackage');
+    const arr = [
+        {name: '家私', num: 42},
+        {name: '家私', num: 40},
+        {name: '家私', num: 16},
+        {name: '家私', num: 2}];
+    // const arr = [
+    //     {name: '家私', num: 40},
+    //     {name: '家私', num: 30},
+    //     {name: '家私', num: 20},
+    //     {name: '家私', num: 10}];
+    //
+    // const arr = [
+    //     {name: '家私', num: 90},
+    //     {name: '家私', num: 7},
+    //     {name: '家私', num: 2},
+    //     {name: '家私', num: 1}];
+    // const arr = [
+    //     {name: '家私', num: 30},
+    //     {name: '家私', num: 28},
+    //     {name: '家私', num: 22},
+    //     {name: '家私', num: 20}];
+    const $packageNameDiv = $grossProfitRatioPackage.find('div');
+    const $packageNameList = $grossProfitRatioPackage.find('h4');
+    const $packageNumList = $grossProfitRatioPackage.find('p');
+    arr.forEach(function (item, index) {
+        //  标题文字
+        const $div = $($packageNameDiv[index]);
+        $div.css({
+            width: `${item.num}%`,
+        });
+        const divFontSizeRate = 100;
+        console.log(`${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`);
+        $($packageNameList[index])
+            .text(item.name)
+            .css({
+                // fontSize: `${Math.max((item.num / divFontSizeRate), 0.2)}rem`,
+                fontSize: `${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`,
+            });
+        //  百分比
+        const $p = $($packageNumList[index]);
+        $p.text(`${item.num}%`);
+        const pFontSizeRate = 50;
+        // console.log(item.num / pFontSizeRate);
+        $p.css({
+            fontSize: `${Math.min(0.66, Math.max((item.num / pFontSizeRate), 0.34))}rem`,
+        });
+    })
+
+</script>
+
 </body>
 </html>

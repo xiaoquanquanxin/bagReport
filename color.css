@@ -1,5 +1,5 @@
 :root {
-    --backgroundcolor: #312D2E;
+    --312D2E: #312D2E;
 
     --thin-border: #675E61;
 
@@ -94,6 +94,10 @@
 
 .cC8C1C3 {
     color: var(--C8C1C3);
+}
+
+.bg312D2E {
+    background-color: var(--312D2E);
 }
 
 .bg494345 {

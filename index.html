@@ -36,6 +36,13 @@
             color: orange;
         }
 
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
     <style data-msg="拎包业务">
         .main-warp {
@@ -124,6 +131,7 @@
         }
 
         .bag-as-whole-item {
+            width: 33.33%;
             font-weight: lighter;
         }
 
@@ -137,11 +145,11 @@
         .bag-as-whole-item.active-tab::after {
             display: block;
             content: '';
-            width: 50%;
+            width: 30%;
             position: absolute;
             height: 0.03rem;
             background-color: var(--active-tab);
-            left: 25%;
+            left: 35%;
             bottom: -0.01rem;
         }
 
@@ -149,6 +157,21 @@
         .bag-as-whole-hr {
             border: none;
             border-bottom: 0.01rem solid var(--thin-border);
+        }
+
+        /*拎包整体的内容*/
+        .bag-as-whole-menu {
+            width: 100%;
+        }
+
+        /*默认隐藏*/
+        .bag-as-whole-menu-item {
+            display: none;
+        }
+
+        /*只有激活的才展开*/
+        .bag-as-whole-menu-item.active-menu-item {
+            display: block;
         }
 
         /*这是一个整体结构*/
@@ -348,95 +371,249 @@
         </ul>
     </section>
     <section class="bag-as-whole" style="display: none;">
-        <ul class="bag-as-whole-ul font13">
-            <li class="bag-as-whole-item active-tab">拎包整体</li>
-            <li class="bag-as-whole-item">营销环节</li>
-            <li class="bag-as-whole-item">打造师环节</li>
+        <ul class="bag-as-whole-ul text-center font13">
+            <li class="bag-as-whole-item active-tab" data-index="0">拎包整体</li>
+            <li class="bag-as-whole-item" data-index="1">营销环节</li>
+            <li class="bag-as-whole-item" data-index="2">打造师环节</li>
         </ul>
         <hr class="bag-as-whole-hr">
-        <div class="normal-padding" style="padding-left: 0.46rem;">
-            <div class="basic-list-struct">
-                <div class="pack-profile-text">
-                    <div class="font14 cFFFFFF">拎包概况</div>
-                    <div class="font10 is-num">截止2020/20/20 20:32</div>
+        <menu class="bag-as-whole-menu">
+            <li class="normal-padding bag-as-whole-menu-item active-menu-item" style="padding-left: 0.46rem;">
+                <div class="basic-list-struct" style="border:none;">
+                    <div class="pack-profile-text">
+                        <div class="font14 cFFFFFF">拎包概况0000000</div>
+                        <div class="font10 is-num">截止2020/20/20 20:32</div>
+                    </div>
+                    <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
                 </div>
-                <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
-            </div>
-            <ul class="situation-yesterday-general font12">
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num">22488</span>
+                <ul class="situation-yesterday-general font12">
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="normal-padding bag-as-whole-menu-item" style="padding-left: 0.46rem;">
+                <div class="basic-list-struct" style="border:none;">
+                    <div class="pack-profile-text">
+                        <div class="font14 cFFFFFF">拎包概况11111111</div>
+                        <div class="font10 is-num">截止2020/20/20 20:32</div>
                     </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num ">22488</span>
+                    <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
+                </div>
+                <ul class="situation-yesterday-general font12">
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="normal-padding bag-as-whole-menu-item" style="padding-left: 0.46rem;">
+                <div class="basic-list-struct" style="border:none;">
+                    <div class="pack-profile-text">
+                        <div class="font14 cFFFFFF">拎包概况11111111</div>
+                        <div class="font10 is-num">截止2020/20/20 20:32</div>
                     </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数
-                            <span class="c858081 is-num">/万元</span>
+                    <div class="font10"><img src="./icon/questionMark.svg" class="question-mark" alt="">数据说明</div>
+                </div>
+                <ul class="situation-yesterday-general font12">
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num">22488</span>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
                         </div>
-                    </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num">22488</span>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
-                    </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数</div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num ">22488</span>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
-                    </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-                <li class="basic-list-struct">
-                    <div>
-                        <div class="font11 cFFFDFD">昨日房屋统计套数
-                            <span class="c858081 is-num">/万元</span>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数</div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num ">22488</span>
+                            </div>
                         </div>
-                        <div class="font10">
-                            <span class="c858081">历史累计</span>
-                            <span class="cFF6C78 is-num">22488</span>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD">昨日房屋统计套数
+                                <span class="c858081 is-num">/万元</span>
+                            </div>
+                            <div class="font10">
+                                <span class="c858081">历史累计</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
                         </div>
-                    </div>
-                    <span class="font33 is-num cFFFFFF">4</span>
-                </li>
-            </ul>
-        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                </ul>
+            </li>
+        </menu>
     </section>
     <section class="normal-padding">
         地图
     </section>
     <section class="normal-padding">
         <p class="cFFFFFF font16" style="padding-left: 0.02rem;padding-bottom:0.28rem">全国整体</p>
-        <div class="cE8E5E6 font13" style=";position:relative;">
-            <span>房屋认购数、拎包认购数及转化率</span>
+        <div class="cE8E5E6 font13" style=";position:relative;"
+             chart-control-name="chart-a">
+            <span chart-control-index="0" class="show">房屋认购数、拎包认购数及转化率</span>
+            <span chart-control-index="1" class="hide">拎包合同和拎包首款额</span>
             <div class="select-date">
                 <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
@@ -452,17 +629,20 @@
             </div>
         </div>
         <p class="c858081 font10" style="padding-top: 0.05rem;">(拎包认购数/房屋认购数)</p>
-        <div data-msg="条形统计图tab">
-            <div>条形统计图</div>
+        <div data-msg="条形统计图tab" chart-control-name="chart-a">
+            <div chart-control-index="0" class="show">扇形统计图</div>
+            <div chart-control-index="1" class="hide">条形统计图</div>
         </div>
-        <div class="bar-chart-control w17 font9">
-            <div class="active-bar-chart">房屋认购数、拎包认购数及转化率</div>
-            <div>拎包合同和拎包首款额</div>
+        <div class="bar-chart-control w17 font9" data-chart-control="chart-a">
+            <div data-chart-control-index="0" class="active-bar-chart">房屋认购数、拎包认购数及转化率</div>
+            <div data-chart-control-index="1">拎包合同和拎包首款额</div>
         </div>
     </section>
     <section class="normal-padding">
-        <div class="cE8E5E6 font13" style=";position:relative;">
-            <span>各套包合同占比</span>
+        <div class="cE8E5E6 font13" style=";position:relative;"
+             chart-control-name="chart-b">
+            <span chart-control-index="0" class="show">各套包合同占比</span>
+            <span chart-control-index="1" class="hide">各组合套包购买人数占比</span>
             <div class="select-date">
                 <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
@@ -477,17 +657,18 @@
                 </ul>
             </div>
         </div>
-        <div data-msg="扇形统计图tab">
-            <div>扇形统计图</div>
+        <div data-msg="扇形统计图tab" chart-control-name="chart-b">
+            <div chart-control-index="0" class="show">扇形统计图</div>
+            <div chart-control-index="1" class="hide">条形统计图</div>
         </div>
-        <div class="bar-chart-control w14 font9">
-            <div class="active-bar-chart">各套包合同额占比</div>
-            <div>各组合套包购买人数占比</div>
+        <div class="bar-chart-control w14 font9" data-chart-control="chart-b">
+            <div data-chart-control-index="0" class="active-bar-chart">各套包合同额占比</div>
+            <div data-chart-control-index="1">各组合套包购买人数占比</div>
         </div>
     </section>
-    <section class="bag-as-whole" style="display: none;">
+    <section class="bag-as-whole" style="">
         <div class="normal-padding" style="padding-left: 0.46rem;">
-            <div class="basic-list-struct">
+            <div class="basic-list-struct" style="border:none;">
                 <div class="pack-profile-text">
                     <div class="font13 cFFFFFF">拎包毛利<span class="font10 c858081">（以合同额预估）</span></div>
                     <div class="font10 is-num">截止2020/20/20 20:32</div>
@@ -563,8 +744,10 @@
         </div>
     </section>
     <section class="normal-padding">
-        <div class="cE8E5E6 font13" style=";position:relative;">
-            <span>各套包毛利占比</span>
+        <div class="cE8E5E6 font13" style=";position:relative;" chart-control-name="chart-c">
+            <span chart-control-index="0" class="show">各套包毛利及毛利率</span>
+            <span chart-control-index="1" class="hide">各套包毛利占比</span>
+            <span chart-control-index="2" class="hide">整体毛利毛利率趋势</span>
             <div class="select-date">
                 <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
@@ -579,23 +762,26 @@
                 </ul>
             </div>
         </div>
-        <div data-msg="竖型统计图，各套包毛利占比" class="c191717 gross-profit-ratio-package" id="grossProfitRatioPackage">
-            <div class="bgEF5A66"><h4 class="font13">家私</h4>
-                <p class="is-num">43%</p></div>
-            <div class="bgF0A9AD"><h4 class="font12">家私</h4>
-                <p class="is-num">43%</p></div>
-            <div class="bgFCE3E9"><h4 class="font11">家私</h4>
-                <p class="is-num">43%</p></div>
-            <div class="bgFFFFFF"><h4 class="font10">家私</h4>
-                <p class="is-num">43%</p></div>
+        <div data-msg="毛利占比" chart-control-name="chart-c">
+            <div chart-control-index="0" class="show c191717 gross-profit-ratio-package" id="grossProfitRatioPackage">
+                <div class="bgEF5A66"><h4 class="font13">家私</h4>
+                    <p class="is-num">43%</p></div>
+                <div class="bgF0A9AD"><h4 class="font12">家私</h4>
+                    <p class="is-num">43%</p></div>
+                <div class="bgFCE3E9"><h4 class="font11">家私</h4>
+                    <p class="is-num">43%</p></div>
+                <div class="bgFFFFFF"><h4 class="font10">家私</h4>
+                    <p class="is-num">43%</p></div>
+            </div>
+            <div chart-control-index="1" class="hide">bbb</div>
+            <div chart-control-index="2" class="hide">ccc</div>
         </div>
-        <div class="bar-chart-control w13 font9">
-            <div class="active-bar-chart">各套包毛利及毛利率</div>
-            <div>各套包毛利占比</div>
-            <div>整体毛利<br>毛利率趋势</div>
+        <div class="bar-chart-control w13 font9" data-chart-control="chart-c">
+            <div data-chart-control-index="0" class="active-bar-chart">各套包毛利及毛利率</div>
+            <div data-chart-control-index="1">各套包毛利占比</div>
+            <div data-chart-control-index="2">整体毛利<br>毛利率趋势</div>
         </div>
     </section>
-
     <section class="normal-padding">
         <p class="font15 cFFFFFF">全国各项目情况</p>
         <table class="national-projects text-center" cellspacing="0">
@@ -609,16 +795,32 @@
             </tr>
             </thead>
             <tbody class="cE8E5E6 font11 is-num">
-            <tr><td>广州常春藤</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-            <tr><td>中山京沪城</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-            <tr><td>遵义蔷薇国际</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-
+            <tr>
+                <td>广州常春藤</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>中山京沪城</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5%</td>
+            </tr>
+            <tr>
+                <td>遵义蔷薇国际</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5%</td>
+            </tr>
             </tbody>
         </table>
     </section>
-    <section class="normal-padding"></section>
+    <section class="normal-padding" data-msg="占位"></section>
 </div>
-
 <script>
     colorStyle.href = `color.css?v=${Math.random()}`;
     fontStyle.href = `font.css?v=${Math.random()}`;
@@ -638,6 +840,47 @@
     })(document, window);
 </script>
 <script src="./zepto/zepto.v1.2.0.min.js"></script>
+<script data-msg="拎包整体tab点击">
+    //  点击目标
+    const $bagAsWholeUl = $('.bag-as-whole-ul');
+    //  切换目标
+    const $bagAsWholeMenuItem = $('.bag-as-whole-menu').find('.bag-as-whole-menu-item');
+    $bagAsWholeUl.on('click', function (e) {
+        //  激活当前tab的class
+        $bagAsWholeUl.find('.active-tab').removeClass('active-tab');
+        const $target = $(e.target);
+        $target.addClass('active-tab');
+        const index = $target.data('index');
+        //  隐藏全部的item，展示当前的item
+        $bagAsWholeMenuItem.hide().eq(index).show();
+        e.stopPropagation();
+    });
+</script>
+<script>
+    //  带有向上三角的大按块
+    const $barChartControl = $('.bar-chart-control');
+    $barChartControl.on('click', function (e) {
+        const $target = $(e.target);
+        //  先改变样式
+        $target
+            .addClass('active-bar-chart')
+            .siblings()
+            .removeClass('active-bar-chart');
+        //  选中的应该被控制的div的name
+        const chartControlName = $target.parent().data('chart-control');
+        const chartControlIndex = $target.data('chart-control-index');
+        //  应该被控制的div
+        const $chartControlDiv = $(`[chart-control-name='${chartControlName}']`);
+        // console.log($chartControlDiv);
+        //  被控制的全部的div
+        const $chartControlItem = $chartControlDiv.find('[chart-control-index]');
+        const $currentDiv = $chartControlDiv.find(`[chart-control-index='${chartControlIndex}']`);
+        $chartControlItem.hide();
+        $currentDiv.show();
+        e.stopPropagation();
+    })
+
+</script>
 <script data-msg="日期选择">
     //  日期选择
     const $selectDate = $('.select-date');
@@ -649,9 +892,6 @@
         $parent.removeClass('select-date-open');
         e.stopPropagation();
         const $target = $(e.target);
-        // console.log($parent);
-        // console.log($parent.find('.current-date'));
-        // debugger
         $parent.find('.current-date').text($target.text());
         $this.find('.bg403B3D').removeClass('bg403B3D');
         $target.addClass('bg403B3D');
@@ -696,7 +936,7 @@
             width: `${item.num}%`,
         });
         const divFontSizeRate = 100;
-        console.log(`${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`);
+        // console.log(`${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`);
         $($packageNameList[index])
             .text(item.name)
             .css({

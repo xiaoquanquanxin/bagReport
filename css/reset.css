@@ -1,6 +1,6 @@
 @font-face {
     font-family: "otf";
-    src: url('font-face-custom.otf?t=1510890772899') format('truetype');
+    src: url('../font/font-face-custom.otf?t=1510890772899') format('truetype');
 }
 
 * {

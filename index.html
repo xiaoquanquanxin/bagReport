@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>拎包报表</title>
-    <script src="utils.js"></script>
+    <script src="js/utils.js"></script>
     <style data-msg="拎包业务">
         /*主要*/
         .normal-padding {
@@ -797,14 +797,14 @@
     <section class="normal-padding" data-msg="占位"></section>
 </div>
 </body>
-<script src="./zepto/zepto.v1.2.0.min.js"></script>
-<script src="./jweixin-1.3.2.js"></script>
+<script src="./js/zepto/zepto.v1.2.0.min.js"></script>
+<script src="./js/jweixin-1.3.2.js"></script>
 <script>
     //  加载css
     ;(function () {
-        loadCss('color.css');
-        loadCss('font.css');
-        loadCss('reset.css');
+        loadCss('./css/color.css');
+        loadCss('./css/font.css');
+        loadCss('./css/reset.css');
     }());
 
     //  加载js
@@ -814,7 +814,7 @@
         }
         console.log('是嵌入微信中的');
         //  业务
-        loadJs("./index.js");
+        loadJs("./js/index.js");
     }());
 </script>
 <!--测试log-->

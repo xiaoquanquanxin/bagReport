@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "otf";
+    src: url('font-face-custom.otf?t=1510890772899') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+.is-num {
+    font-family: 'otf', "Microsoft YaHei", sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+html {
+    color: orange;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.nowrap {
+    /*word-break: break-all;*/
+    word-wrap: break-word;
+    word-break: normal;
+}

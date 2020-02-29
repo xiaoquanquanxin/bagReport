@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>红点@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="11" cy="11" r="6"></circle>
+    </defs>
+    <g id="红点" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Oval-Copy-4">
+            <circle stroke="#FF626F" stroke-width="2.66666667" stroke-linejoin="square" fill="#FF626F" fill-rule="evenodd" cx="11" cy="11" r="4.66666667"></circle>
+            <circle stroke-opacity="0.3" stroke="#E07E7E" stroke-width="4" cx="11" cy="11" r="8"></circle>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>最新进展</title>
+    <script src="utils.js"></script>
+    <style>
+        html, body {
+            min-height: 100%;
+            height: 100%;
+        }
+
+        .main-wrap {
+            min-height: 100%;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+        }
+
+        /*主要*/
+        .normal-padding {
+            padding: 0.44rem .43rem 0 0.36rem;
+        }
+
+        .pl-20 {
+            padding-left: 0.2rem;
+        }
+
+        .w34 {
+            width: 0.34rem;
+        }
+
+        /*最新进展标题*/
+        .dev-header {
+            display: flex;
+            justify-content: flex-start;
+            align-content: center;
+            align-items: center;
+        }
+
+        .dev-header-img {
+            /*width: 0.34rem;*/
+        }
+
+        .dev-header img {
+            width: 100%;
+            display: block;
+        }
+
+
+    </style>
+    <style data-msg="虚线">
+        .dashed {
+            position: relative;
+        }
+
+        /*虚线*/
+        .dashed::after {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 0;
+            border-left: 0.02rem dotted var(--5C5557);
+            z-index: -1;
+        }
+
+        .dev-header.dashed::after {
+            left: 0.53rem;
+            top: 0.8rem;
+            height: 100000rem;
+        }
+
+        li.dashed::after {
+            display: none;
+            left: 0.16rem;
+        }
+    </style>
+    <style data-msg="内容部分">
+        .dev-section li {
+            display: flex;
+            justify-content: flex-start;
+            align-content: center;
+            padding-bottom: 0.4rem;
+        }
+
+        /*实心环*/
+        .solid-torus {
+            width: 0.2rem;
+            height: 0.2rem;
+            border-radius: 50%;
+            position: relative;
+            top: 0.51rem;
+            overflow: hidden;
+            margin: auto;
+            left: 0.01rem;
+        }
+
+        .solid-torus img {
+            width: 100%;
+            display: block;
+        }
+
+        /*实际内容*/
+        .dev-section-item {
+            width: 6.34rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .dev-section-item > div {
+            padding: 0.18rem 0.36rem 0.32rem;
+            border-radius: 0.04rem;
+            line-height: 0.46rem;
+        }
+
+        .dev-section-item time {
+            display: block;
+        }
+
+        .dev-section-item img {
+            margin-top: 0.18rem;
+            display: block;
+            width: 100%;
+            height: 2.28rem;
+        }
+
+        /*小三角*/
+        .dev-section-item:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0.2rem;
+            height: 0.2rem;
+            transform-origin: center center;
+            transform: rotate(-45deg);
+            background-color: var(--3E393B);
+            /*background-color: red;*/
+            top: 0.48rem;
+            left: 0.1rem;
+
+        }
+    </style>
+</head>
+<body class="bg312D2E">
+<div class="main-wrap" onclick="location.reload(true);">
+    <header class="normal-padding dev-header dashed">
+        <div class="dev-header-img w34">
+            <img src="./icon/watch.svg" alt="">
+        </div>
+        <h3 class="pl-20 cFF626F font20">最新进展</h3>
+    </header>
+    <section class="normal-padding">
+        <ul class="dev-section">
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/first-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/others-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/others-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/others-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/others-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="w34">
+                    <div class="solid-torus">
+                        <img src="./icon/others-node.svg" alt="">
+                    </div>
+                </div>
+                <div class="dev-section-item pl-20">
+                    <div class="bg3E393B">
+                        <time class="cB6B0B0 font10">一小时前</time>
+                        <p class="cFFFFFF font12 nowrap">好消息好消息</p>
+                        <img src="./latest-img.png" alt="">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+<script>
+    //  加载css
+    ;(function () {
+        loadCss('color.css');
+        loadCss('font.css');
+        loadCss('reset.css');
+    }());
+
+</script>
+</html>

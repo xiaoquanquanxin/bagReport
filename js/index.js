@@ -137,7 +137,7 @@ window.onload = function () {
             const $latestProgress = $('#latestProgress');
             $latestProgress.on('click', function (e) {
                 //  去最新进展
-                const url = `${window.location.origin}/latestDevelopments.html?=${Math.random()}&isWX=true`;
+                const url = `${window.location.origin}/messageList.html?=${Math.random()}&isWX=true`;
                 wx.miniProgram.navigateTo({
                     url: `/pages/outLine/outLine?url=${encodeURIComponent(url)}`,
                 });

@@ -29,12 +29,15 @@ html {
     display: block;
 }
 
+.flex {
+    display: flex;
+}
+
 .hide {
     display: none;
 }
 
 .nowrap {
-    /*word-break: break-all;*/
+    word-break: break-all;
     word-wrap: break-word;
-    word-break: normal;
 }

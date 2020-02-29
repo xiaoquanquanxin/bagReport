@@ -11,6 +11,7 @@ window.onload = function () {
         c();
         d();
         e();
+        f();
 
         //  拎包整体tab点击
         function a() {
@@ -144,5 +145,28 @@ window.onload = function () {
             });
         }
 
+        //  数据说明
+        function f() {
+            //  数据说明按钮 带问号
+            const dataDeclarationTap = $('.data-declaration-tap');
+            //  确认说明按钮 —— 我知道了
+            const $confirmDeclaration = $("#confirmDeclaration");
+            //  确认说明弹框
+            const $dateDeclarationBox = $("#dateDeclarationBox");
+            //  弹出
+            dataDeclarationTap.on('click', function (e) {
+                e.stopPropagation();
+                $dateDeclarationBox.removeClass('hide').addClass('flex');
+            });
+            //  隐藏
+            $confirmDeclaration.on('click', function (e) {
+                e.stopPropagation();
+                $dateDeclarationBox.removeClass('flex').addClass('hide');
+            });
+            //  防止滚动
+            $dateDeclarationBox.on('touchmove', function (e) {
+                e.preventDefault();
+            });
+        }
     }());
 };

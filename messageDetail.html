@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>最新进展详情</title>
+    <script src="js/utils.js"></script>
+    <style>
+        .normal-padding {
+            padding: 0.4rem;
+        }
+
+        time {
+            display: block;
+        }
+
+        article {
+            margin-top: 0.4rem;
+            font-weight: lighter;
+            text-align: justify;
+        }
+
+        article img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg312D2E" onclick="location.reload(true)">
+<section class="normal-padding nowrap">
+    <p class="cFFFFFF font20 ">好消息好消息好消息好消息</p>
+    <time class="c858081 font11">2020-10-32</time>
+    <article class="cB6B0B0 font13">
+        fnjioaehfo分后发iawfguiaowhfiawguiuigibihfa啊 发发 护额就会发会
+        fnjioaehfo分后发iawfguiaowhfiawguiuigibihfa啊 发发 护额就会发会
+        fnjioaehfo分后发iawfguiaowhfiawguiuigibihfa啊 发发 护额就会发会
+    </article>
+</section>
+</body>
+<script src="./js/zepto/zepto.v1.2.0.min.js"></script>
+<script src="./js/jweixin-1.3.2.js"></script>
+<script>
+    //  加载css
+    ;(function () {
+        loadCss('./css/color.css');
+        loadCss('./css/font.css');
+        loadCss('./css/reset.css');
+    }());
+    //  加载js
+    ;(function () {
+        if (!getQueryVariable('isWx')) {
+            return;
+        }
+        console.log('是嵌入微信中的');
+        //  业务
+        loadJs("./js/index.js");
+    }());
+</script>
+</html>

@@ -5,47 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="color.css?v=11" id="colorStyle">
-    <link rel="stylesheet" href="font.css?v=11" id="fontStyle">
     <title>拎包报表</title>
-    <style data-msg="整体">
-        @font-face {
-            font-family: "otf";
-            src: url('font-face-custom.otf?t=1510890772899') format('truetype');
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: "Microsoft YaHei", sans-serif;
-        }
-
-        .is-num {
-            font-family: 'otf', "Microsoft YaHei", sans-serif;
-        }
-
-        li {
-            list-style-type: none;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        html {
-            color: orange;
-        }
-
-        .show {
-            display: block;
-        }
-
-        .hide {
-            display: none;
-        }
-    </style>
+    <script src="utils.js"></script>
     <style data-msg="拎包业务">
-
         /*主要*/
         .normal-padding {
             padding: .34rem .42rem;
@@ -80,7 +42,8 @@
             color: var(--FFFFFF);
             display: flex;
             justify-content: space-between;
-            padding: .20rem .30rem;
+            padding: 0 0.30rem;
+            line-height: 0.64rem;
         }
 
         /*最新进展*/
@@ -209,9 +172,7 @@
             margin-right: 0.04rem;
         }
     </style>
-
-
-    <style>
+    <style data-msg="日期选择样式">
         /*日期选择样式*/
         .select-date {
             width: 1.4rem;
@@ -256,7 +217,6 @@
             text-indent: 0.5rem;
         }
     </style>
-
     <style data-msg="条形统计图的tab">
         .bar-chart-control {
             display: flex;
@@ -310,9 +270,8 @@
             transform-origin: center center;
         }
     </style>
-
     <style data-msg="竖型统计图，各套包毛利占比">
-        .gross-profit-ratio-package {
+        div.gross-profit-ratio-package {
             display: flex;
             height: 2rem;
             margin: 0.6rem 0;
@@ -378,7 +337,7 @@
             <li class="main-item">会员业务</li>
             <li class="main-item">打造师</li>
         </ul>
-        <p class="latest-progress font12"><span>最新进展</span><span>• • •</span></p>
+        <p class="latest-progress font12"><span>最新进展</span><span id="latestProgress">• • •</span></p>
         <ul class="latest-progress-msg bg3E393B font11">
             <li class="latest-progress-item"><span>几iowafjoihgioafo我告我放假额爱后方很平稳几iowafjoihgioafo我告我放假额爱后方很平稳</span><span
                     class="font10">一小时前</span>
@@ -837,139 +796,32 @@
     </section>
     <section class="normal-padding" data-msg="占位"></section>
 </div>
-<script>
-    colorStyle.href = `color.css?v=${Math.random()}`;
-    fontStyle.href = `font.css?v=${Math.random()}`;
-</script>
-<script>
-    ;(function (doc, win, undefined) {
-        var docEl = doc.documentElement,
-            resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize',
-            recalc = function () {
-                const clientWidth = docEl.clientWidth;
-                if (clientWidth === undefined) return;
-                docEl.style.fontSize = clientWidth / 7.50 + 'px';
-            };
-        if (doc.addEventListener === undefined) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        doc.addEventListener('DOMContentLoaded', recalc, false)
-    })(document, window);
-</script>
-<script src="./zepto/zepto.v1.2.0.min.js"></script>
-<script data-msg="拎包整体tab点击">
-    //  点击目标
-    const $bagAsWholeUl = $('.bag-as-whole-ul');
-    //  切换目标
-    const $bagAsWholeMenuItem = $('.bag-as-whole-menu').find('.bag-as-whole-menu-item');
-    $bagAsWholeUl.on('click', function (e) {
-        //  激活当前tab的class
-        $bagAsWholeUl.find('.active-tab').removeClass('active-tab');
-        const $target = $(e.target);
-        $target.addClass('active-tab');
-        const index = $target.data('index');
-        //  隐藏全部的item，展示当前的item
-        $bagAsWholeMenuItem.hide().eq(index).show();
-        e.stopPropagation();
-    });
-</script>
-<script>
-    //  带有向上三角的大按块
-    const $barChartControl = $('.bar-chart-control');
-    $barChartControl.on('click', function (e) {
-        const $target = $(e.target);
-        //  先改变样式
-        $target
-            .addClass('active-bar-chart')
-            .siblings()
-            .removeClass('active-bar-chart');
-        //  选中的应该被控制的div的name
-        const chartControlName = $target.parent().data('chart-control');
-        const chartControlIndex = $target.data('chart-control-index');
-        //  应该被控制的div
-        const $chartControlDiv = $(`[chart-control-name='${chartControlName}']`);
-        // console.log($chartControlDiv);
-        //  被控制的全部的div
-        const $chartControlItem = $chartControlDiv.find('[chart-control-index]');
-        const $currentDiv = $chartControlDiv.find(`[chart-control-index='${chartControlIndex}']`);
-        $chartControlItem.hide();
-        $currentDiv.show();
-        e.stopPropagation();
-    })
-
-</script>
-<script data-msg="日期选择">
-    //  日期选择
-    const $selectDate = $('.select-date');
-    //  日期选择的ul
-    const $selectDateUl = $selectDate.find('ul');
-    $selectDateUl.on('click', function (e) {
-        const $this = $(this);
-        const $parent = $this.parent();
-        $parent.removeClass('select-date-open');
-        e.stopPropagation();
-        const $target = $(e.target);
-        $parent.find('.current-date').text($target.text());
-        $this.find('.bg403B3D').removeClass('bg403B3D');
-        $target.addClass('bg403B3D');
-    });
-    //  日期选择的默认位置
-    const $defaultDate = $selectDate.find('.default-date');
-    $defaultDate.on('click', function (e) {
-        $(this).parents().addClass('select-date-open');
-        e.stopPropagation();
-    });
-</script>
-<script data-msg="各套包毛利占比">
-    const $grossProfitRatioPackage = $('#grossProfitRatioPackage');
-    const arr = [
-        {name: '家私', num: 42},
-        {name: '家私', num: 40},
-        {name: '家私', num: 16},
-        {name: '家私', num: 2}];
-    // const arr = [
-    //     {name: '家私', num: 40},
-    //     {name: '家私', num: 30},
-    //     {name: '家私', num: 20},
-    //     {name: '家私', num: 10}];
-    //
-    // const arr = [
-    //     {name: '家私', num: 90},
-    //     {name: '家私', num: 7},
-    //     {name: '家私', num: 2},
-    //     {name: '家私', num: 1}];
-    // const arr = [
-    //     {name: '家私', num: 30},
-    //     {name: '家私', num: 28},
-    //     {name: '家私', num: 22},
-    //     {name: '家私', num: 20}];
-    const $packageNameDiv = $grossProfitRatioPackage.find('div');
-    const $packageNameList = $grossProfitRatioPackage.find('h4');
-    const $packageNumList = $grossProfitRatioPackage.find('p');
-    arr.forEach(function (item, index) {
-        //  标题文字
-        const $div = $($packageNameDiv[index]);
-        $div.css({
-            width: `${item.num}%`,
-        });
-        const divFontSizeRate = 100;
-        // console.log(`${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`);
-        $($packageNameList[index])
-            .text(item.name)
-            .css({
-                // fontSize: `${Math.max((item.num / divFontSizeRate), 0.2)}rem`,
-                fontSize: `${Math.min(0.26, Math.max((item.num / divFontSizeRate), 0.2))}rem`,
-            });
-        //  百分比
-        const $p = $($packageNumList[index]);
-        $p.text(`${item.num}%`);
-        const pFontSizeRate = 50;
-        // console.log(item.num / pFontSizeRate);
-        $p.css({
-            fontSize: `${Math.min(0.66, Math.max((item.num / pFontSizeRate), 0.34))}rem`,
-        });
-    })
-
-</script>
-<script src="wx.js"></script>
 </body>
+<script src="./zepto/zepto.v1.2.0.min.js"></script>
+<script src="./jweixin-1.3.2.js"></script>
+<script>
+    //  加载css
+    ;(function () {
+        loadCss('color.css');
+        loadCss('font.css');
+        loadCss('reset.css');
+    }());
+
+    //  加载js
+    ;(function () {
+        if (!getQueryVariable('isWx')) {
+            return;
+        }
+        console.log('是嵌入微信中的');
+        //  业务
+        loadJs("./index.js");
+    }());
+</script>
+<!--测试log-->
+<!--<script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.3.0"></script>-->
+<script>
+    // init vConsole
+    // var vConsole = new VConsole();
+    // console.log('Hello world');
+</script>
 </html>

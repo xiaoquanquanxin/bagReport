@@ -252,6 +252,20 @@
         loadCss('./css/font.css');
         loadCss('./css/reset.css');
     }());
-
+    //  加载js
+    ;(function () {
+        if (!getQueryVariable('isWx')) {
+            return;
+        }
+        console.log('是嵌入微信中的');
+        //  业务
+        window.onload = function () {
+            //  点击进入进展详情
+            $('.dev-section-item').on('click', function (e) {
+                wxNavigateTo(PageUrlList.messageDetail, {messageId: 2263});
+                e.stopPropagation();
+            });
+        }
+    }());
 </script>
 </html>

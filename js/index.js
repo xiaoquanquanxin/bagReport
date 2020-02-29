@@ -132,17 +132,20 @@ window.onload = function () {
             })
         }
 
-        //  点击点点点,进入最新进展列表
+        //  进入最新进展列表
         function e() {
+            //  去最新进展列表
             const $latestProgress = $('#latestProgress');
             $latestProgress.on('click', function (e) {
-                //  去最新进展
-                const url = `${window.location.origin}/messageList.html?=${Math.random()}&isWX=true`;
-                wx.miniProgram.navigateTo({
-                    url: `/pages/outLine/outLine?url=${encodeURIComponent(url)}`,
-                });
+                wxNavigateTo(PageUrlList.messageList, {name: '我是messageList'});
                 e.stopPropagation();
             });
+            const $latestProgressDetail = $('#latestProgressDetail');
+            //  去最新进展详情
+            $latestProgressDetail.on('click', function (e) {
+                wxNavigateTo(PageUrlList.messageDetail, {messageId: 2});
+                e.stopPropagation();
+            })
         }
 
         //  数据说明

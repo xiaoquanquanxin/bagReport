@@ -53,6 +53,30 @@ function loadCss(href) {
     document.head.appendChild(link);
 }
 
+//  带参数的跳转
+function wxNavigateTo(pageUrl, params) {
+    params = params || {};
+    params = Object.assign(params, {isWx: true, v: Math.random()});
+    console.log(params);
+    //  拼接搜索的参数
+    const searchUrl = Object.keys(params).reduce(function (pre, current) {
+        return `${pre}${current}=${params[current]}&`;
+    }, '?').slice(0, -1);
+    console.log(searchUrl);
+    const url = `${pageUrl}${searchUrl}`;
+    wx.miniProgram.navigateTo({
+        url: `/pages/outLine/outLine?url=${encodeURIComponent(url)}`,
+    });
+}
+
+//  跳转页面地址
+const PageUrlList = {
+    //  进展列表
+    messageList: `${window.location.origin}/messageList.html`,
+    //  进展详情
+    messageDetail: `${window.location.origin}/messageDetail.html`,
+
+};
 // /**
 //  * 在onload之后加载业务js
 //  * @fn:function 业务js方法

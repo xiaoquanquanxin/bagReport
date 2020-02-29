@@ -38,6 +38,7 @@
         fnjioaehfo分后发iawfguiaowhfiawguiuigibihfa啊 发发 护额就会发会
     </article>
 </section>
+<p id="text"></p>
 </body>
 <script src="./js/zepto/zepto.v1.2.0.min.js"></script>
 <script src="./js/jweixin-1.3.2.js"></script>
@@ -55,7 +56,9 @@
         }
         console.log('是嵌入微信中的');
         //  业务
-        loadJs("./js/index.js");
+        window.onload = function () {
+            text.innerText = location.href;
+        }
     }());
 </script>
 </html>

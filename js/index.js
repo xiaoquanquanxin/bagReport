@@ -31,11 +31,14 @@ window.onload = function () {
             });
         }
 
-        //  带有向上三角的大按块
+        //  带有向上三角的大按块————切换canvas
         function b() {
             const $barChartControl = $('.bar-chart-control');
+            console.log($barChartControl);
             $barChartControl.on('click', function (e) {
                 const $target = $(e.target);
+                console.log($target);
+                console.log($target.data('bind-fn'));
                 //  先改变样式
                 $target
                     .addClass('active-bar-chart')
@@ -52,6 +55,11 @@ window.onload = function () {
                 const $currentDiv = $chartControlDiv.find(`[chart-control-index='${chartControlIndex}']`);
                 $chartControlItem.hide();
                 $currentDiv.show();
+                const fnName = $target.data('bind-fn');
+                if (fnName && typeof window[fnName] === "function") {
+                    window[fnName]();
+                    window[fnName] = null;
+                }
                 e.stopPropagation();
             })
         }
@@ -171,5 +179,10 @@ window.onload = function () {
                 e.preventDefault();
             });
         }
+
+        //  请求数据
+        (function f1() {
+            pieDiagram1Fn();
+        }());
     }());
 };

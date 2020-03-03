@@ -235,7 +235,7 @@
         }
 
         .bar-chart-control.w17 > div {
-            width: 1.9rem;
+            width: 2rem;
         }
 
         .bar-chart-control.w14 > div {
@@ -666,7 +666,7 @@
         <section class="normal-padding">
             <div class="cE8E5E6 font13" style=";position:relative;"
                  chart-control-name="chart-b">
-                <span chart-control-index="0" class="show">各套包合同占比</span>
+                <span chart-control-index="0" class="show">各套包合同额占比</span>
                 <span chart-control-index="1" class="hide">各组合套包购买人数占比</span>
                 <div class="select-date">
                     <div class="default-date bg494345">
@@ -683,12 +683,18 @@
                 </div>
             </div>
             <div data-msg="扇形统计图tab" chart-control-name="chart-b">
-                <div chart-control-index="0" class="show">扇形统计图</div>
-                <div chart-control-index="1" class="hide">条形统计图</div>
+                <div chart-control-index="0" class="show"
+                     style="height: 5rem;margin:0.333rem auto;"
+                     id="pieDiagram1">扇形统计图
+                </div>
+                <div chart-control-index="1" class="hide"
+                     style="height: 4rem;margin:0.333rem auto;"
+                     id="barDiagram1">条形统计图
+                </div>
             </div>
             <div class="bar-chart-control w14 font9" data-chart-control="chart-b">
-                <div data-chart-control-index="0" class="active-bar-chart">各套包合同额占比</div>
-                <div data-chart-control-index="1">各组合套包购买人数占比</div>
+                <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比</div>
+                <div data-chart-control-index="1" data-bind-fn="barDiagram1Fn">各组合套包购买人数占比</div>
             </div>
         </section>
         <section class="bag-as-whole">
@@ -874,6 +880,7 @@
 </section>
 
 </body>
+<script src="./js/echarts.min.js"></script>
 <script src="./js/zepto/zepto.v1.2.0.min.js"></script>
 <script src="./js/jweixin-1.3.2.js"></script>
 <script>
@@ -890,6 +897,8 @@
             return;
         }
         console.log('是嵌入微信中的');
+        //  Echart配置
+        loadJs("./js/chart.js");
         //  业务
         loadJs("./js/index.js");
     }());

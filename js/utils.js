@@ -6,6 +6,11 @@
         const clientWidth = docEl.clientWidth;
         if (clientWidth === undefined) return;
         docEl.style.fontSize = clientWidth / 7.50 + 'px';
+        return;
+        setTimeout(function () {
+            docEl.style.fontSize = clientWidth / 7.5 / (7.5 / 7.2) + 'px';
+            alert(docEl.style.fontSize)
+        }, 1000);
     };
     if (doc.addEventListener === undefined) return;
     win.addEventListener(resizeEvt, recalc, false);

@@ -70,6 +70,10 @@
     --5C5557: #5C5557;
 
 
+    /*销售合计*/
+    --DF5867: #DF5867;
+    --E2E2E2: #E2E2E2;
+    --4B4547: #4B4547;
 }
 
 
@@ -118,6 +122,10 @@
     color: var(--CDC7C9)
 }
 
+.cE2E2E2 {
+    color: var(--E2E2E2);
+}
+
 
 .bg312D2E {
     background-color: var(--312D2E);
@@ -129,6 +137,10 @@
 
 .bg403B3D {
     background-color: var(--403B3D);
+}
+
+.bgDF5867 {
+    background-color: var(--DF5867);
 }
 
 .bgEF5A66 {
@@ -149,6 +161,10 @@
 
 .bg3E393B {
     background-color: var(--3E393B);
+}
+
+.bg4B4547 {
+    background: var(--4B4547);
 }
 
 /*.cAEA6A8 {*/

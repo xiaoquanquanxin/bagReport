@@ -164,6 +164,119 @@ const proportionNumberForCombinationPackage = function (data) {
     };
 };
 
+//  套餐销售数量
+const packageSalesQuantity = function (data) {
+    data = {
+        "x": ["11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20", "11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20"],
+        "v": ["24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33", "24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33"]
+    };
+    const n = data.x.length;
+    //  最多有多少列
+    const interval = window.innerWidth > 374 ? 15 : 14;
+    return {
+        animation: false,
+        xAxis: {
+            type: 'category',
+            //  刻度文字
+            axisLabel: {
+                color: '#D3CCCE',
+                fontSize: 7,
+                rotate: 69,
+            },
+            //  纵坐标本身
+            axisLine: {
+                lineStyle: {
+                    show: false,
+                }
+            },
+            axisTick: {
+                show: false,
+            },
+            splitLine: {
+                show: false
+            },
+            splitNumber: data.length,
+            data: data.x,
+            //  留白策略
+            boundaryGap: false,
+        },
+        yAxis: {
+            type: 'value',
+            //  刻度文字
+            axisLabel: {
+                color: '#FFFFFF',
+                fontSize: 9,
+                margin: 17,
+            },
+            axisLine: {
+                lineStyle: {
+                    type: 'dotted',
+                    color: '#605A5B',
+                    width: 0.5,
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#564F50',
+                    width: 0.33,
+                }
+            },
+            axisTick: {
+                lineStyle: {
+                    color: '#564F50',
+                    width: 0.33,
+                },
+                length: 10,
+            },
+        },
+        series: [
+            {
+                type: 'line',
+                //  平滑
+                smooth: true,
+                symbolSize: 3,
+                sampling: 'average',
+                symbol: 'circle',
+                seriesLayoutBy: 'column',
+                itemStyle: {
+                    color: '#312D2E',
+                    borderColor: '#DF5867',
+                    borderWidth: 0.67,
+                    shadowColor: 'rgba(224,126,126,0.3)',
+                    shadowBlur: 1.33,
+                },
+                areaStyle: {
+                    color: 'rgba(223,88,103,0.05)',
+                },
+                data: data.v,
+                backgroundColor: 'green',
+                lineStyle: {
+                    width: 1,
+                    color: '#DF5867',
+                },
+            }
+        ],
+        //  整体的位置
+        grid: {
+            top: 30,
+            left: 40,
+            right: 10,
+            bottom: 30,
+        },
+        //  滚动
+        dataZoom: [
+            {
+                animation: true,
+                type: 'inside',
+                zoomLock: true,
+                realtime: false,
+                start: 100 - (n > interval ? interval / n * 100 : 100),
+                end: 100,
+            }
+        ],
+    };
+};
+
 //  扇形统计图————各套包合同额占比
 function pieDiagram1Fn() {
     const myChart = echarts.init(pieDiagram1);
@@ -179,4 +292,10 @@ function pieDiagram1Fn() {
 function barDiagram1Fn() {
     const myChart = echarts.init(barDiagram1);
     myChart.setOption(proportionNumberForCombinationPackage());
+}
+
+//  折线统计图————套餐销售数量
+function brokenLineDiagram1Fn() {
+    const myChart = echarts.init(brokenLineDiagram1);
+    myChart.setOption(packageSalesQuantity());
 }

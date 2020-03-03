@@ -10,6 +10,10 @@
     font-size: .64rem;
 }
 
+.font25 {
+    font-size: .50rem;
+}
+
 .font20 {
     font-size: .40rem;
 }
@@ -50,6 +54,6 @@
     font-size: .18rem;
 }
 
-.fw3{
+.fw3 {
     font-weight: 300;
 }

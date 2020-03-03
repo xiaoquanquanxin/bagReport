@@ -57,7 +57,7 @@ const proportionContractValuePackage = function (data) {
 const proportionNumberForCombinationPackage = function (data) {
     const n = 14;
     //  最多有多少列
-    const interval = window.innerWidth > 374 ? 9 : 8;
+    const interval = window.innerWidth > 374 ? 10 : 9;
     return {
         color: colorConfig,
         animation: false,

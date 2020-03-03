@@ -12,6 +12,7 @@ window.onload = function () {
         d();
         e();
         f();
+        g();
 
         //  拎包整体tab点击
         function a() {
@@ -34,7 +35,7 @@ window.onload = function () {
         //  带有向上三角的大按块————切换canvas
         function b() {
             const $barChartControl = $('.bar-chart-control');
-            console.log($barChartControl);
+            // console.log($barChartControl);
             $barChartControl.on('click', function (e) {
                 const $target = $(e.target);
                 console.log($target);
@@ -177,6 +178,51 @@ window.onload = function () {
             //  防止滚动
             $dateDeclarationBox.on('touchmove', function (e) {
                 e.preventDefault();
+            });
+        }
+
+        //  累计销售冠军楼盘
+        function g() {
+            //  ul
+            const $salesChampion = $('#salesChampion');
+            //  区域
+            const $salesVolumePillar = $salesChampion.find('.sales-volume-pillar');
+            //  名称
+            const $salesVolumeName = $salesChampion.find('.sales-volume-name');
+
+            const data = [
+                {name: '家电套餐', sales: 0},
+                {name: '家私套餐', sales: 0},
+                {name: '智能套餐', sales: 0},
+                {name: '家装套餐', sales: 1},
+            ];
+            //  总数
+            const total = data.reduce(function (prev, current) {
+                return prev + current.sales;
+            }, 0);
+            if (total === 0) {
+                return;
+            }
+            //  比例
+            const rate = data[3].sales / 300 * 100;
+            data.forEach(function (item, index) {
+                const value = item.sales / rate;
+                //  每个的范围
+                const $self = $($salesVolumePillar[index]);
+                // console.log(value)
+                //  边框宽度 === 数据换算成rem的值 * 0.707 + 保底的0.14 rem
+                const borderWidth = value * 0.707 + 0.14;
+                console.log(borderWidth);
+                //  右侧淡色小方块
+                $self.find('div').css({
+                    borderWidth: `${borderWidth}rem`,
+                });
+                $self.css({
+                    width: `${(borderWidth + 0.2) * 1.41}rem`,
+                });
+
+                $self.siblings('span').text(item.sales);
+                $salesVolumeName[index].innerText = item.name;
             });
         }
 

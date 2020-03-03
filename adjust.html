@@ -27,6 +27,10 @@
             line-height: 0.52rem;
         }
 
+        .main-title span:last-child {
+            margin-left: 0.34rem;
+        }
+
         .section-title {
             line-height: 0.3rem;
             padding-bottom: 0.08rem;
@@ -294,15 +298,16 @@
 
 
         /*!*销量名*!*/
-        /*.sales-volume-name {*/
-        /*    !*width: 1rem;*!*/
-        /*}*/
+        .sales-volume-name {
+            width: 1rem;
+        }
 
         /*销量详情*/
         .sales-volume-content {
-            width: 4.5rem;
-            margin-left: 0.3rem;
+            width: 5rem;
+            margin-left: 0.2rem;
             justify-content: flex-start;
+            align-content: center;
             align-items: center;
             height: 0.28rem;
             position: relative;
@@ -311,12 +316,24 @@
         /*销量柱*/
         .sales-volume-pillar {
             position: relative;
-            width: 0.37rem;
+            width: 0.48rem;
             height: 0.28rem;
+            overflow: hidden;
         }
 
         .sales-volume-pillar div {
             position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 0.2rem;
+            height: 0.2rem;
+            margin: auto;
+            border-bottom: 0.14rem solid var(--F0A9AD);
+            border-left: 0.14rem solid var(--EF5A66);
+            right: 0.07rem;
+            left: 0.07rem;
+            transform: rotate(45deg);
+            transform-origin: center center;
         }
 
         /*右侧正方形*/
@@ -348,7 +365,7 @@
         /*破折号 分割线*/
         .sales-volume-split {
             width: 0.6rem;
-            border-top: none;
+            border: none;
             border-bottom: 0.02rem solid var(--979797);
             margin-left: 0.16rem;
             margin-right: 0.12rem;
@@ -534,55 +551,47 @@
         </div>
         <section class="normal-padding">
             <p class="cE8E5E6 font10">累计销售冠军楼盘</p>
-            <p class="main-title"><span class="cFFFFFF font20">广州常春藤</span> <span
-                    class="cFF626F font25 is-num">927</span></p>
-            <ul class="sales-champion-list flex">
+            <p class="main-title flex"><span class="cFFFFFF font20">广州常春藤</span> <span
+                    class="cFF626F font25 is-num">0</span></p>
+            <ul class="sales-champion-list flex" id="salesChampion">
                 <li class="flex">
-                    <span class="sales-volume-name cFFFFFF font12">家电套餐</span>
+                    <span class="sales-volume-name flex cFFFFFF font12">-</span>
                     <div class="sales-volume-content flex">
                         <div class="sales-volume-pillar">
-                            <div class="pillar-right bgFCE3E9"></div>
-                            <div class="pillar-top bgF0A9AD"></div>
-                            <div class="pillar-bottom bgEF5A66"></div>
+                            <div class="bgFCE3E9"></div>
                         </div>
                         <hr class="sales-volume-split">
-                        <span class="cFF626F font15">320</span>
+                        <span class="cFF626F font15 is-num">0</span>
                     </div>
                 </li>
                 <li class="flex">
-                    <span class="sales-volume-name cFFFFFF font12">家私套餐</span>
+                    <span class="sales-volume-name flex cFFFFFF font12">-</span>
                     <div class="sales-volume-content flex">
                         <div class="sales-volume-pillar">
-                            <div class="pillar-right bgFCE3E9"></div>
-                            <div class="pillar-top bgF0A9AD"></div>
-                            <div class="pillar-bottom bgEF5A66"></div>
+                            <div class="bgFCE3E9"></div>
                         </div>
                         <hr class="sales-volume-split">
-                        <span class="cFF626F font15">320</span>
+                        <span class="cFF626F font15 is-num">0</span>
                     </div>
                 </li>
                 <li class="flex">
-                    <span class="sales-volume-name cFFFFFF font12">智能套餐</span>
+                    <span class="sales-volume-name flex cFFFFFF font12">-</span>
                     <div class="sales-volume-content flex">
                         <div class="sales-volume-pillar">
-                            <div class="pillar-right bgFCE3E9"></div>
-                            <div class="pillar-top bgF0A9AD"></div>
-                            <div class="pillar-bottom bgEF5A66"></div>
+                            <div class="bgFCE3E9"></div>
                         </div>
                         <hr class="sales-volume-split">
-                        <span class="cFF626F font15">320</span>
+                        <span class="cFF626F font15 is-num">0</span>
                     </div>
                 </li>
                 <li class="flex">
-                    <span class="sales-volume-name cFFFFFF font12">家装套餐</span>
+                    <span class="sales-volume-name flex cFFFFFF font12">-</span>
                     <div class="sales-volume-content flex">
                         <div class="sales-volume-pillar">
-                            <div class="pillar-right bgFCE3E9"></div>
-                            <div class="pillar-top bgF0A9AD"></div>
-                            <div class="pillar-bottom bgEF5A66"></div>
+                            <div class="bgFCE3E9"></div>
                         </div>
                         <hr class="sales-volume-split">
-                        <span class="cFF626F font15">320</span>
+                        <span class="cFF626F font15 is-num">0</span>
                     </div>
                 </li>
             </ul>

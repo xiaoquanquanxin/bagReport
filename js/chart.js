@@ -63,13 +63,14 @@ const proportionNumberForCombinationPackage = function (data) {
         animation: false,
         legend: {
             data: ['仅家电', '家电家私', '家电家私智能', '其他'],
-            textStyle: {color: '#FFFFFF'},
+            textStyle: {color: '#FFFFFF', fontSize: 9},
             itemWidth: 8,
             itemHeight: 6,
             left: 0,
             borderRadius: 0,
             //  不交互
             selectedMode: false,
+            top: 6,
         },
         grid: {
             left: 30,
@@ -85,6 +86,7 @@ const proportionNumberForCombinationPackage = function (data) {
                 axisLine: {
                     lineStyle: {
                         color: '#564F50',
+                        width: 0.33,
                     }
                 },
                 //  刻度
@@ -94,7 +96,7 @@ const proportionNumberForCombinationPackage = function (data) {
                 //  坐标轴刻度标签
                 axisLabel: {
                     color: '#D3CCCE',
-                    fontSize: 9,
+                    fontSize: 7,
                 }
             }
         ],
@@ -115,6 +117,7 @@ const proportionNumberForCombinationPackage = function (data) {
                 splitLine: {
                     lineStyle: {
                         color: '#564F50',
+                        width: 0.33,
                     }
                 },
             }
@@ -165,10 +168,10 @@ const proportionNumberForCombinationPackage = function (data) {
 function pieDiagram1Fn() {
     const myChart = echarts.init(pieDiagram1);
     myChart.setOption(proportionContractValuePackage([
-        {value: 23, name: '家电'},
-        {value: 33, name: '家私'},
-        {value: 36, name: '智能'},
         {value: 49, name: '家装'},
+        {value: 36, name: '智能'},
+        {value: 33, name: '家私'},
+        {value: 23, name: '家电'},
     ]));
 }
 

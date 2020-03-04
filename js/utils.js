@@ -56,7 +56,7 @@ function loadCss(href) {
 //  带参数的跳转
 function wxNavigateTo(pageUrl, params) {
     params = params || {};
-    params = Object.assign(params, {isWx: true, v: Math.random()});
+    params = Object.assign(params, {iswx: true, v: Math.random()});
     console.log(params);
     //  拼接搜索的参数
     const searchUrl = Object.keys(params).reduce(function (pre, current) {

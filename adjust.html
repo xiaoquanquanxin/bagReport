@@ -132,6 +132,7 @@
             right: 0;
             border-radius: 0.04rem;
             overflow: hidden;
+            z-index: +100;
         }
 
         /*日期打开的样式*/
@@ -371,6 +372,26 @@
             margin-right: 0.12rem;
         }
     </style>
+    <style data-msg="地图">
+        /*地图*/
+        .map-tooltip {
+            line-height: 0.46rem;
+        }
+
+        /*三角*/
+        .map-tooltip-triangle {
+            width: 0.3rem;
+            height: 0.3rem;
+            position: absolute;
+            left: -0.15rem;
+            top: 50%;
+            margin-top: -0.15rem;
+            background-color: #ffffff;
+            transform-origin: center center;
+            transform: skew(-45deg);
+            z-index: -1;
+        }
+    </style>
 </head>
 <body class="bg312D2E">
 <div id="main">
@@ -506,7 +527,7 @@
                 </li>
             </menu>
         </section>
-        <section class="normal-padding" data-msg="地图">
+        <section   data-msg="地图" id="chinaMap" style="height: 6rem;background-color: lightblue">
             地图
         </section>
         <section class="normal-padding" data-msg="扇形统计图和条形统计图">
@@ -651,6 +672,10 @@
         loadJs("./js/chart.js");
         //  业务
         loadJs("./js/index.js");
+        //  地图
+        loadJs("./js/china.js");
+        //
+        loadJs("./js/aaa.js");
     }());
 </script>
 <!--测试log-->

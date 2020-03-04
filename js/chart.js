@@ -57,7 +57,8 @@ const proportionContractValuePackage = function (data) {
 const proportionNumberForCombinationPackage = function (data) {
     const n = 14;
     //  最多有多少列
-    const interval = window.innerWidth > 374 ? 10 : 9;
+    // const interval = window.innerWidth > 374 ? 10 : 9;
+    const interval = 14;
     return {
         color: colorConfig,
         animation: false,
@@ -97,7 +98,10 @@ const proportionNumberForCombinationPackage = function (data) {
                 axisLabel: {
                     color: '#D3CCCE',
                     fontSize: 7,
-                }
+                    interval: 0,
+                },
+                //  留白策略
+                boundaryGap: ['20%', '20%'],
             }
         ],
         yAxis: [
@@ -166,13 +170,19 @@ const proportionNumberForCombinationPackage = function (data) {
 
 //  套餐销售数量
 const packageSalesQuantity = function (data) {
-    data = {
-        "x": ["11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20", "11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20"],
-        "v": ["24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33", "24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33"]
-    };
+    //  最大值
+    const MAX_VALUE = Math.max.apply(null, data.v);
+    // console.log(MAX_VALUE);
+    //  最大值的位数
+    const MAX_VALUE_DIGIT = Math.abs(Math.ceil(MAX_VALUE)).toString().length;
+    //  十的几次方
+    const DV = Math.pow(10, MAX_VALUE_DIGIT - 1);
+    //  最大值+最大位数*1
+    const UP_VALUE = (Math.floor(Math.ceil(MAX_VALUE) / DV) + 1) * DV;
+    // console.log(UP_VALUE);
     const n = data.x.length;
     //  最多有多少列
-    const interval = window.innerWidth > 374 ? 15 : 14;
+    const interval = 18;
     return {
         animation: false,
         xAxis: {
@@ -182,6 +192,7 @@ const packageSalesQuantity = function (data) {
                 color: '#D3CCCE',
                 fontSize: 7,
                 rotate: 69,
+                interval: 0,
             },
             //  纵坐标本身
             axisLine: {
@@ -274,6 +285,62 @@ const packageSalesQuantity = function (data) {
                 end: 100,
             }
         ],
+        //  事件
+        tooltip: {
+            //  触发类型
+            trigger: 'axis',
+            //  坐标轴指示器配置项。
+            axisPointer: {
+                // type: 'none',
+                // label: {
+                //     show: true,
+                // },
+                lineStyle: {
+                    color: '#564F50',
+                    width: 0.5,
+                }
+            },
+            //  是否将 tooltip 框限制在图表的区域内。
+            confine: true,
+            //  位置
+            position: function (points, params, dom, rect, size) {
+                // console.log(points, params, dom, rect, size);
+                const arr = [];
+                //  x轴位置 === 鼠标位置-dom元素位置宽度
+                arr[0] = (points[0] - size.contentSize[0] / 2);
+                arr[1] = points[1];
+                return arr;
+                //  y轴位置 === chart高度*（当前元素值/最大高度）- grid.top - grid.bottom
+                arr[1] = (size.viewSize[1] - 30 - 30) * (1 - (params[0].data / UP_VALUE));
+                // console.log(arr);
+                console.log(dom, size);
+                return arr;
+
+                //  三角形
+                const $underTriangle = $(`<div></div>`);
+                const _width = size.contentSize[0] / 5;
+                $underTriangle.css({
+                    backgroundColor: '#DF5867',
+                    position: 'absolute',
+                    bottom: `${-_width / 2}px`,
+                    left: `50%`,
+                    marginLeft: `${-_width / 2}px`,
+                    width: `${_width}px`,
+                    height: `${_width}px`,
+                    transformOrigin: 'center center',
+                    transform: 'rotate(45deg)',
+                });
+                $(dom).append($underTriangle);
+                // window.aa = dom
+
+            },
+            formatter: '{c}',
+            backgroundColor: '#DF5867',
+            textStyle: {
+                fontSize: 9,
+            },
+            padding: [0, 5],
+        }
     };
 };
 
@@ -297,5 +364,10 @@ function barDiagram1Fn() {
 //  折线统计图————套餐销售数量
 function brokenLineDiagram1Fn() {
     const myChart = echarts.init(brokenLineDiagram1);
-    myChart.setOption(packageSalesQuantity());
+    myChart.setOption(packageSalesQuantity(
+        {
+            "x": ["11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20", "11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20"],
+            "v": ["24", "211", "280", "576", "397", "377", "341", "900", "727", "181", "255", "33", "24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33"]
+        }
+    ));
 }

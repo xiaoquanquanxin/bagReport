@@ -2,6 +2,7 @@ window.onload = function () {
     ;(function () {
         _eventUpwardTriangleButtonClick();
         _eventSelectDate();
+        _assignmentDate();
         //  去楼盘详情页
         ;(function () {
             const $detailData = $('#detailData');
@@ -11,8 +12,25 @@ window.onload = function () {
             });
         }());
 
+
+        //  fixme   正式
+        // $.getJSON(APIList.salesSummaryV2, function (result) {
+        //     console.log(result);
+        //     if(result.isSuccess){
+        //         requestCallback(result.data);
+        //     }
+        // });
+        //  fixme   调试
+        requestCallback(mainData.data);
+
         //  请求数据
-        (function f1() {
+        function requestCallback(data) {
+            // console.log(data);
+            /**
+             * 赋值
+             * */
+            _assignmentYesterdaySalesVolume(data);
+
             //  上面的折线统计图
             brokenLineDiagram1Fn();
             //  默认绘制条形统计图
@@ -66,18 +84,40 @@ window.onload = function () {
                 });
 
             }());
-        }());
+        };
     }());
+
+    // //  基础赋值
+    // function basicAssignment() {
+    //     _assignmentYesterdaySalesVolume();
+    // }
+
+    //  日期
+    function _assignmentDate() {
+        const date = getDate();
+        dueDate.innerText = `${date.YEAR}/${completionZero(date.MONTH)}/${completionZero(date.DATE)} 24:00`;
+    }
+
+    //  昨日销量
+    function _assignmentYesterdaySalesVolume(data) {
+        console.log(data);
+    }
 };
+
 
 const mainData = {
     "data": {
         "mapAddr": {
-            "11": ["烦烦烦"],
-            "121": ["太原紫藤公馆"],
-            "北京市1": ["员工特惠", "阿萨", "中山璟湖城", "北京市朝阳区东大桥路9号A座3层", "重庆蔷薇国际", "是对的"],
-            "天津市": ["广州蔷薇花园"],
-            "aa-11": ["df"]
+            "11": {"areaName": "11", "village": ["烦烦烦"], "totalValue": "0", "yesterdayValue": "0"},
+            "121": {"areaName": "121", "village": ["太原紫藤公馆"], "totalValue": "102", "yesterdayValue": "0"},
+            "北京市1": {
+                "areaName": "北京市1",
+                "village": ["员工特惠", "阿萨", "中山璟湖城", "北京市朝阳区东大桥路9号A座3层", "重庆蔷薇国际", "是对的"],
+                "totalValue": "577",
+                "yesterdayValue": "0"
+            },
+            "天津市": {"areaName": "天津市", "village": ["广州蔷薇花园"], "totalValue": "0", "yesterdayValue": "0"},
+            "aa-11": {"areaName": "aa-11", "village": ["df"], "totalValue": "0", "yesterdayValue": "0"}
         },
         "mapVillage": {
             "广州常春藤": {
@@ -363,27 +403,8 @@ const mainData = {
             "TotalFamilyDecorationReceives": 340000.00,
             "ConversionRate": 0.0,
             "MarginRate": 0.0
-        },
-        "yesterdayTopVillage": "",
-        "totalTopVillage": "广州常春藤",
-        "weekSales": [{"sales": "24", "week": "11.04"}, {"sales": "211", "week": "11.11"}, {
-            "sales": "280",
-            "week": "11.18"
-        }, {"sales": "577", "week": "11.25"}, {"sales": "397", "week": "12.02"}, {
-            "sales": "377",
-            "week": "12.09"
-        }, {"sales": "341", "week": "12.16"}, {"sales": "700", "week": "12.23"}, {
-            "sales": "727",
-            "week": "12.30"
-        }, {"sales": "181", "week": "01.06"}, {"sales": "313", "week": "01.13"}, {
-            "sales": "183",
-            "week": "01.20"
-        }, {"sales": "22", "week": "01.27"}, {"sales": "8", "week": "02.03"}, {
-            "sales": "3",
-            "week": "02.10"
-        }, {"sales": "28", "week": "02.24"}]
+        }
     }, "isSuccess": true
 };
-
 
 

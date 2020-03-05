@@ -29,12 +29,23 @@ function getQueryVariable(variable) {
 function getDate() {
     const date = new Date();
     const YEAR = date.getFullYear();
-    const MONTH = date.getFullYear();
+    const MONTH = date.getMonth() + 1;
     const DATE = date.getDate();
+
+    return {
+        YEAR: YEAR,
+        MONTH: MONTH,
+        DATE: DATE,
+    };
     //  todo    测试版
-    return `${YEAR}.${MONTH}.${DATE}.${date.getTime()}`;
+    // return `${YEAR}.${MONTH}.${DATE}.${date.getTime()}`;
     //  todo    正式版
     // return `${YEAR}.${MONTH}.${DATE}`;
+}
+
+//  补全零
+function completionZero(num) {
+    return num < 10 ? `0${num}` : num;
 }
 
 //  加载js
@@ -43,7 +54,8 @@ function loadJs(src, scriptId, singlePass, loadCallback) {
     script.type = "text/javascript";
     //  如果需要拼接随机数
     if (!singlePass) {
-        src = `${src}?v=${getDate()}`;
+        const date = getDate();
+        src = `${src}?v=${date.YEAR}.${date.MONTH}.${date.DATE}`;
     }
     // console.log(src);
     script.src = src;

@@ -68,5 +68,10 @@ const PageUrlList = {
     messageDetail: `${window.location.origin}/messageDetail.html`,
     //  楼盘详情
     housingDetails: `${window.location.origin}/housingDetails.html`,
+};
+
+//  API接口地址
+const APIList = {
+    salesSummaryV2: `${window.location.origin}/statistics/h5/salesSummaryV2`,
 
 };

@@ -13,12 +13,11 @@ window.onload = function () {
     }
 
     //  昨日销量
-    function _assignmentYesterdaySalesVolume(
-        YesterdayFamilyElectric,
-        YesterdayFamilyProperty,
-        YesterdaySmartHome,
-        YesterdayFamilyDecoration,
-    ) {
+    //  家电
+    //  家私
+    //  智能家居
+    //  家装
+    function _assignmentYesterdaySalesVolume(YesterdayFamilyElectric, YesterdayFamilyProperty, YesterdaySmartHome, YesterdayFamilyDecoration,) {
         YesterdayFamilyElectric = YesterdayFamilyElectric || 0;
         YesterdayFamilyProperty = YesterdayFamilyProperty || 0;
         YesterdaySmartHome = YesterdaySmartHome || 0;
@@ -172,26 +171,17 @@ window.onload = function () {
             /**
              * 赋值
              * */
-            _assignmentYesterdaySalesVolume(
-                //  家电
-                data.YesterdayFamilyElectric,
-                //  家私
-                data.YesterdayFamilyProperty,
-                //  智能家居
-                data.YesterdaySmartHome,
-                //  家装
-                data.YesterdayFamilyDecoration,
-            );
 
+            _assignmentYesterdaySalesVolume(data.YesterdayFamilyElectric, data.YesterdayFamilyProperty, data.YesterdaySmartHome, data.YesterdayFamilyDecoration);
             _assignmentRealEstateOnSale(data.yesterdayAndTotalSale, Object.keys(data.mapVillage).length);
-
             _assignmentSalesChampion(data.mapVillage['广州常春藤']);
             _assignmentNationalProjects(data.mapVillage);
-
             //  上面的折线统计图
             brokenLineDiagram1Fn();
-            //  默认绘制条形统计图
-            pieDiagram1Fn();
+
+
+            //  默认绘制扇形统计图
+            pieDiagram1Fn(-1, data.yesterdayAndTotalSale);
             //  中国地图绘制
             drawChinaMap();
             //  省份地图绘制

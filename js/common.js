@@ -13,6 +13,8 @@ function _eventSelectDate(selectCallback) {
         $parent.find('.current-date').text($target.text());
         $this.find('.bg403B3D').removeClass('bg403B3D');
         $target.addClass('bg403B3D');
+        $parent.data('value', $target.data('value'));
+        // console.log($parent, $parent.data('value'));
         if (typeof selectCallback === "function") {
             selectCallback();
         }
@@ -52,8 +54,10 @@ function _eventUpwardTriangleButtonClick() {
         $currentDiv.show();
         const fnName = $target.data('bind-fn');
         if (fnName && typeof window[fnName] === "function") {
-            window[fnName]();
-            window[fnName] = null;
+            //  找到父级section元素，下面的日期选择
+            const value = $target.parents('section').find('.select-date').data('value');
+            console.log(value);
+            window[fnName](value);
         }
         e.stopPropagation();
     })

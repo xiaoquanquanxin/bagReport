@@ -439,11 +439,11 @@
 </head>
 <body class="bg312D2E">
 <div id="main">
-    <section class="normal-padding">
+    <section class="normal-padding" onclick="location.reload(true);">
         <h2 class="up-title cFFFFFF font20 is-num">Sales data statistic</h2>
         <p class="main-title cFFFFFF font18 fw3">实地打造师销售数据统计</p>
     </section>
-    <section class="normal-padding" data-msg="截至" onclick="location.reload(true);">
+    <section class="normal-padding" data-msg="截至" style="display: none;">
         <p class="cFFFFFF font14 section-title">昨日销量</p>
         <p class="c858081 font10">截至 <span id="dueDate">-</span></p>
         <div class="deadline flex">
@@ -483,7 +483,7 @@
             </ul>
         </div>
     </section>
-    <section class="bag-as-whole" style="display: block;padding:0;" data-msg="列表">
+    <section class="bag-as-whole" style="display: none;padding:0;" data-msg="列表">
         <menu class="bag-as-whole-menu">
             <li class="normal-padding bag-as-whole-menu-item">
                 <div class="basic-list-struct" style="border:none;padding: 0;">
@@ -614,37 +614,32 @@
              chart-control-name="chart-b">
             <span chart-control-index="0" class="show">各套包合同额占比</span>
             <span chart-control-index="1" class="hide">各组合套包购买人数占比</span>
-            <div class="select-date">
+            <div class="select-date" data-value="-1">
                 <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
-                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <div class="cFFFFFF font10 current-date">昨日</div>
                     <img src="./icon/selectIcon.svg" alt="">
                 </div>
                 <ul class="cC5BCBE bg494345 font10">
-                    <li>按日</li>
-                    <li>按月</li>
-                    <li class="bg403B3D">按周</li>
-                    <li>3023年</li>
+                    <li data-value="-1" class="bg403B3D">昨日</li>
+                    <li data-value="1">总的</li>
                 </ul>
             </div>
         </div>
         <div data-msg="扇形统计图tab" chart-control-name="chart-b">
             <div chart-control-index="0" class="show"
                  style="height: 5rem;margin:0.333rem auto;"
-                 id="pieDiagram1">扇形统计图
-            </div>
+                 id="pieDiagram1"></div>
             <div chart-control-index="1" class="hide"
                  style="height: 3.6rem;margin:0.333rem auto;"
-                 id="barDiagram1">条形统计图
-            </div>
+                 id="barDiagram1"></div>
         </div>
         <div class="bar-chart-control w14 font9" data-chart-control="chart-b">
-            <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比
-            </div>
+            <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比</div>
             <div data-chart-control-index="1" data-bind-fn="barDiagram1Fn">各组合套包购买人数占比</div>
         </div>
     </section>
-    <section class="normal-padding" data-msg="累计销售冠军楼盘">
+    <section class="normal-padding" data-msg="累计销售冠军楼盘" style="display: none;">
         <p class="c858081 font10">累计销售冠军楼盘</p>
         <p class="main-title flex"><span class="cFFFFFF font20">广州常春藤</span><span
                 class="cFF626F font25 is-num" id="ChampionTotalHandBag">0</span></p>
@@ -691,7 +686,7 @@
             </li>
         </ul>
     </section>
-    <section class="normal-padding" data-msg="全国各项目情况">
+    <section class="normal-padding" data-msg="全国各项目情况" style="display: none;">
         <p class="font15 cFFFFFF">全国各项目情况</p>
         <table class="national-projects text-center" cellspacing="0">
             <thead class="cC8C1C3 font9 bg3E393B ">

@@ -344,15 +344,52 @@ const packageSalesQuantity = function (data) {
     };
 };
 
-//  扇形统计图————各套包合同额占比
-function pieDiagram1Fn() {
+/**
+ * 扇形统计图————各套包合同额占比
+ * @param:markValue 标记值，-1昨日，1总的
+ * @param:data 数据
+ * */
+function pieDiagram1Fn(value, data) {
+    //  自绑定一下数据哈
+    data = data || pieDiagram1Fn.data;
+    pieDiagram1Fn.data = data;
     const myChart = echarts.init(pieDiagram1);
-    myChart.setOption(proportionContractValuePackage([
-        {value: 49, name: '家装'},
-        {value: 36, name: '智能'},
-        {value: 33, name: '家私'},
-        {value: 23, name: '家电'},
-    ]));
+    //  数据
+    const list = [];
+    //  总金额
+    let TOTAL_CONTRACT;
+    switch (value) {
+        case -1:
+            list.push({value: data.YesterdayFamilyDecorationContract || 0, name: '家装'});
+            list.push({value: data.YesterdaySmartHomeContract || 0, name: '智能'});
+            list.push({value: data.YesterdayFamilyPropertyContract || 0, name: '家私'});
+            list.push({value: data.YesterdayFamilyElectricContract || 0, name: '家电'});
+            TOTAL_CONTRACT = data.YesterdayContract || 0;
+            break;
+        case 1:
+            list.push({value: data.TotalFamilyDecorationContract || 0, name: '家装'});
+            list.push({value: data.TotalSmartHomeContract || 0, name: '智能'});
+            list.push({value: data.TotalFamilyPropertyContract || 0, name: '家私'});
+            list.push({value: data.TotalFamilyElectricContract || 0, name: '家电'});
+            TOTAL_CONTRACT = data.TotalContract || 0;
+            break;
+        default :
+            throw new Error('pieDiagram1Fn - value');
+    }
+
+    // console.log(list, TOTAL_CONTRACT);
+    //  计算比例
+    list.forEach(function (item) {
+        const VALUE = Math.round(item.value / TOTAL_CONTRACT * 100);
+        item.value = isNaN(VALUE) ? 0 : VALUE;
+        if (TOTAL_CONTRACT === 0) {
+            item.value = 25;
+        }
+    });
+    console.table(list);
+    myChart.setOption(proportionContractValuePackage(list.sort(function (a, b) {
+        return b.value - a.value;
+    })));
 }
 
 //  条形统计图————各组合套包购买人数占比

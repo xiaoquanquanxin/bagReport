@@ -4,124 +4,157 @@ function drawChinaMap(data) {
         //  位置的信息，750px下
         const seriesData = [{
             name: '北京',
+            spell: 'beijing',
             value: -1,
         }, {
             name: '上海',
+            spell: 'shanghai',
             value: -1,
         }, {
             name: '重庆',
+            spell: 'chongqing',
             value: -1,
         }, {
             name: '河北',
+            spell: 'hebei',
             value: -1,
         }, {
             name: '辽宁',
+            spell: 'liaoning',
             value: -1,
         }, {
             name: '黑龙江',
+            spell: 'heilongjiang',
             value: -1,
         }, {
             name: '湖南',
+            spell: 'hunan',
             value: -1,
         }, {
             name: '安徽',
+            spell: 'anhui',
             value: -1,
         }, {
             name: '新疆',
+            spell: 'xinjiang',
             value: -1,
         }, {
             name: '江苏',
+            spell: 'jiangsu',
             value: -1,
         }, {
             name: '浙江',
+            spell: 'zhejiang',
             value: -1,
         }, {
             name: '江西',
+            spell: 'jiangxi',
             value: -1,
         }, {
             name: '广西',
+            spell: 'guangxi',
             value: -1,
         }, {
             name: '甘肃',
+            spell: 'gansu',
             value: -1,
         }, {
             name: '内蒙古',
+            spell: 'neimenggu',
             value: -1,
         }, {
             name: '陕西',
+            spell: 'shanxi1',
             value: -1,
         }, {
             name: '吉林',
+            spell: 'jilin',
             value: -1,
         }, {
             name: '福建',
+            spell: 'fujian',
             value: -1,
         }, {
             name: '贵州',
+            spell: 'guizhou',
             value: -1,
         }, {
             name: '青海',
+            spell: 'qinghai',
             value: -1,
         }, {
             name: '西藏',
+            spell: 'xizang',
             value: -1,
         }, {
             name: '宁夏',
+            spell: 'ningxia',
             value: -1,
         }, {
             name: '海南',
+            spell: 'hainan',
             value: -1,
         }, {
             name: '台湾',
+            spell: 'taiwan',
             value: -1,
         }, {
             name: '香港',
+            spell: 'xianggang',
             value: -1,
         }, {
             name: '澳门',
+            spell: 'aomen',
             value: -1,
-        },
-            {
-                name: '河南',
-                value: 0,
-                position: [255, 85],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '山西',
-                value: 111,
-                position: [245, 65],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '湖北',
-                value: 0,
-                position: [255, 115],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '四川',
-                value: 111,
-                position: [200, 110],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '云南',
-                value: 999,
-                position: [195, 150],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '天津',
-                value: 111,
-                position: [275, 55],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '山东',
-                value: 111,
-                position: [275, 70],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            }, {
-                name: '广东',
-                value: 1600,
-                position: [250, 165],
-                village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-            },];
+        }, {
+            name: '河南',
+            spell: 'henan',
+            value: 0,
+            position: [255, 85],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '山西',
+            spell: 'shanxi',
+            value: 111,
+            position: [245, 65],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '湖北',
+            spell: 'hubei',
+            value: 0,
+            position: [255, 115],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '四川',
+            spell: 'sichuan',
+            value: 111,
+            position: [200, 110],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '云南',
+            spell: 'yunnan',
+            value: 999,
+            position: [195, 150],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '天津',
+            spell: 'tianjin',
+            value: 111,
+            position: [275, 55],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '山东',
+            spell: 'shandong',
+            value: 111,
+            position: [275, 70],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        }, {
+            name: '广东',
+            spell: 'guangdong',
+            value: 1600,
+            position: [250, 165],
+            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
+        },];
 
         //  颜色配置
         const visualMapColor = [
@@ -191,7 +224,7 @@ function drawChinaMap(data) {
                     formatter: function (params) {
                         // console.clear();
                         if (params.data.village) {
-                            console.log(params.data.village);
+                            // console.log(params.data.village);
                             const arr = params.data.village.map(function (item, index) {
                                 if (index === 0) {
                                     return `<div class="map-tooltip cFF6C78 font10">${item}</div>`;
@@ -291,59 +324,48 @@ function drawChinaMap(data) {
         }
 
         const myChart = echarts.init(chinaMap);
-        setTimeout(function () {
-            myChart.setOption(getChinaMapOption(seriesData));
-        })
-    }())
+        myChart.setOption(getChinaMapOption(seriesData));
+        const mychartEvent = echarts.init(chinaMap);
+        mychartEvent.on('click', function (params) {
+            //  过滤不交互的省份
+            if (params.data.value === -1) {
+                return;
+            }
+            // console.log(params.data.spell, params.data.name);
+            drawProvinceMap(params.data.spell, params.data.name);
+        });
+    }());
 }
 
 //  某个省份的地图绘制
-function drawProvinceMap(provinceName) {
-    provinceName = provinceName || 'guangdong';
-    loadJs(`./js/mapData/province/${provinceName}.js`, provinceName, true, function () {
-        _drawProvinceMap(provinceName)
+function drawProvinceMap(provinceSpell, provinceName,) {
+    provinceSpell = provinceSpell || 'guangdong';
+    provinceName = provinceName || '广东';
+    loadJs(`./js/mapData/province/${provinceSpell}.js`, provinceSpell, true, function () {
+        const option = getProvinceMapOption(provinceName);
+        const myChart = echarts.init(provinceMap);
+        myChart.setOption(option);
     });
 }
 
-function _drawProvinceMap(provinceName) {
-    console.log(provinceName);
-    const option = {
+//  省份配置
+function getProvinceMapOption(provinceName) {
+    return {
         series: [
             {
                 type: 'map',
-                roam: false,
-                zoom: 1,
-                selectedMode: 'single',
                 mapType: provinceName,
-                label: {
-                    normal: {
-                        show: true,
-                        //  省份标签字体颜色
-                        textStyle: {color: "#4A4647"}
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {color: "#4A4647"}
-                    }
-                },
+                data: [],
+                top: 0,
+                bottom: 0,
+                //  不交互的
+                silent: true,
                 itemStyle: {
                     normal: {
-                        borderWidth: .5,//区域边框宽度
-                        borderColor: '#0550c3',//区域边框颜色
-                        areaColor: "#4ea397",//区域颜色
-
+                        areaColor: "#4A4647",
                     },
-                    emphasis: {
-                        borderWidth: .5,
-                        borderColor: '#4b0082',
-                        areaColor: "#ece39e",
-                    }
                 },
             }
-        ]
+        ],
     };
-
-    const myChart = echarts.init(provinceMap);
-    myChart.setOption(option);
-
 }

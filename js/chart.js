@@ -349,7 +349,7 @@ const packageSalesQuantity = function (data) {
  * @param:markValue 标记值，-1昨日，1总的
  * @param:data 数据
  * */
-function pieDiagram1Fn(value, data) {
+function pieDiagram1Fn(markValue, data) {
     //  自绑定一下数据哈
     data = data || pieDiagram1Fn.data;
     pieDiagram1Fn.data = data;
@@ -358,7 +358,7 @@ function pieDiagram1Fn(value, data) {
     const list = [];
     //  总金额
     let TOTAL_CONTRACT;
-    switch (value) {
+    switch (markValue) {
         case -1:
             list.push({value: data.YesterdayFamilyDecorationContract || 0, name: '家装'});
             list.push({value: data.YesterdaySmartHomeContract || 0, name: '智能'});
@@ -386,7 +386,7 @@ function pieDiagram1Fn(value, data) {
             item.value = 25;
         }
     });
-    console.table(list);
+    // console.table(list);
     myChart.setOption(proportionContractValuePackage(list.sort(function (a, b) {
         return b.value - a.value;
     })));

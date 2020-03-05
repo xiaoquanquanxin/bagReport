@@ -1,11 +1,20 @@
 //  中国地图绘制
-function drawChinaMap(data) {
-    (function () {
-        //  位置的信息，750px下
-        const seriesData = [{
+/**
+ * @param:markValue 标记值，-1昨日，1总的
+ * @param:data 数据
+ * */
+function drawChinaMap(markValue, data) {
+    console.log(data);
+    //  自绑定一下数据哈
+    data = data || drawChinaMap.data;
+    drawChinaMap.data = data;
+    //  基础数据
+    const seriesData = (function () {
+        return [{
             name: '北京',
             spell: 'beijing',
             value: -1,
+            position: [100, 100],
         }, {
             name: '上海',
             spell: 'shanghai',
@@ -109,53 +118,77 @@ function drawChinaMap(data) {
         }, {
             name: '河南',
             spell: 'henan',
-            value: 0,
+            value: -1,
             position: [255, 85],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '山西',
             spell: 'shanxi',
-            value: 111,
+            value: -1,
             position: [245, 65],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '湖北',
             spell: 'hubei',
-            value: 0,
+            value: -1,
             position: [255, 115],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '四川',
             spell: 'sichuan',
-            value: 111,
+            value: -1,
             position: [200, 110],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '云南',
             spell: 'yunnan',
-            value: 999,
+            value: -1,
             position: [195, 150],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '天津',
             spell: 'tianjin',
-            value: 111,
+            value: -1,
             position: [275, 55],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '山东',
             spell: 'shandong',
-            value: 111,
+            value: -1,
             position: [275, 70],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
         }, {
             name: '广东',
             spell: 'guangdong',
-            value: 1600,
+            value: -1,
             position: [250, 165],
-            village: ['广州常春藤', '中山京沪城', '遵义蔷薇国际'],
-        },];
-
+        }];
+    }());
+    //  映射,key：城市 ，value：省名
+    const seriesMap = {
+        '11': '广东',
+        '121': '山西',
+        'aa-11': '四川',
+        '北京市1': '北京',
+        '天津市': '天津',
+    };
+    Object.keys(seriesMap).forEach(function (item) {
+        seriesData.forEach(function (it) {
+            if (seriesMap[item] === it.name) {
+                const DATA_ITEM = data[item];
+                it.areaName = DATA_ITEM.areaName;
+                it.village = DATA_ITEM.village;
+                it.totalValue = Number(DATA_ITEM.totalValue);
+                it.yesterdayValue = Number(DATA_ITEM.yesterdayValue);
+                switch (markValue) {
+                    case -1:
+                        it.value = it.yesterdayValue;
+                        break;
+                    case  1:
+                        it.value = it.totalValue;
+                        break;
+                    default:
+                        throw  new Error('formattingSeriesData - xx');
+                }
+                console.log(it.value);
+            }
+        })
+    });
+    console.log(seriesData);
+    (function () {
         //  颜色配置
         const visualMapColor = [
             '#D75E68',
@@ -172,15 +205,17 @@ function drawChinaMap(data) {
             return data.map(function (item) {
                 //  区域的颜色
                 let areaColor = null;
-                if (item.value > 1000) {
+                //  用于比较的值
+                let compareValue = item.value;
+                if (compareValue > 1000) {
                     areaColor = visualMapColor[0];
-                } else if (item.value > 500) {
+                } else if (compareValue > 500) {
                     areaColor = visualMapColor[1];
-                } else if (item.value > 0) {
+                } else if (compareValue > 0) {
                     areaColor = visualMapColor[2];
-                } else if (item.value === 0) {
+                } else if (compareValue === 0) {
                     areaColor = visualMapColor[3];
-                } else if (item.value < 0) {
+                } else if (compareValue < 0) {
                     areaColor = visualMapColor[4];
                 }
                 //  色块

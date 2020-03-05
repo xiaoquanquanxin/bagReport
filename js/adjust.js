@@ -183,7 +183,7 @@ window.onload = function () {
             //  默认绘制扇形统计图
             pieDiagram1Fn(-1, data.yesterdayAndTotalSale);
             //  中国地图绘制
-            drawChinaMap();
+            drawChinaMap(-1,data.mapAddr);
             //  省份地图绘制
             drawProvinceMap();
         }

@@ -183,7 +183,7 @@ function drawChinaMap(markValue, data) {
                     default:
                         throw  new Error('formattingSeriesData - xx');
                 }
-                console.log(it.value);
+                // console.log(it.value);
             }
         })
     });
@@ -403,4 +403,46 @@ function getProvinceMapOption(provinceName) {
             }
         ],
     };
+}
+
+
+//  更加楼盘名，算他在哪个省
+function getProvinceByVillage(villageName) {
+    // console.log(villageName);
+}
+
+/**
+ *  获取冠军楼盘
+ * @param:markValue 标记值，-1昨日，1总的
+ * @param:data 数据
+ * */
+function getChampionVillage(markValue) {
+    const arr = [];
+    Object.keys(requestData.mapVillage).forEach(function (item) {
+        const data = {
+            name: item,
+        };
+        const ITEM = requestData.mapVillage[item];
+        switch (markValue) {
+            case -1:
+                //  拎包认购数
+                data.__room = ITEM.YesterdayRoom || 0;
+                //  拎包合同额
+                data.__contractValue = ITEM.YesterdayContract || 0;
+                //  拎包收款额
+                data.__receives = ITEM.YesterdayReceives || 0;
+                break;
+            case 1:
+                data.__contractValue = ITEM.TotalContract || 0;
+                data.__room = ITEM.TotalRoom || 0;
+                data.__receives = ITEM.TotalReceives || 0;
+                break;
+            default :
+                throw new Error('getChampionVillage - xx');
+        }
+        arr.push(data);
+    });
+    return arr.sort(function (a, b) {
+        return b.__contractValue - a.__contractValue;
+    })[0];
 }

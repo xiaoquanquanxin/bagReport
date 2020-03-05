@@ -141,6 +141,20 @@ window.onload = function () {
             return `${prev}<tr><td>${current}</td><td>${data[current].TotalHandBag}</td><td>${Math.round(data[current].TotalContract / WAN_DIGIT)}</td><td>${Math.round(data[current].TotalReceives / WAN_DIGIT)}</td></tr>`
         }, '');
     }
+
+    //  设置省份楼盘的数据
+    function _assignmentProvincialRealEstate(data) {
+        console.log(data);
+        //  地图选择的楼盘名
+        mapChooseVillageName.innerText = data.name;
+        //  拎包认购数
+        mapChooseHandBag.innerText = data.__room;
+        //  拎包合同额/万
+        mapChooseContract.innerText = data.__contractValue;
+        //  拎包收款额/万
+        mapChooseReceives.innerText = data.__receives;
+    }
+
     ;(function () {
         _eventUpwardTriangleButtonClick();
         _eventSelectDate();
@@ -163,11 +177,12 @@ window.onload = function () {
         //     }
         // });
         //  fixme   调试
-        requestCallback(mainData.data);
+        requestCallback(mainData);
 
         //  请求数据
         function requestCallback(data) {
-            console.log(data);
+            window.requestData = mainData;
+            // console.log(data);
             /**
              * 赋值
              * */
@@ -183,9 +198,15 @@ window.onload = function () {
             //  默认绘制扇形统计图
             pieDiagram1Fn(-1, data.yesterdayAndTotalSale);
             //  中国地图绘制
-            drawChinaMap(-1,data.mapAddr);
+            drawChinaMap(1, data.mapAddr);
+
+            //  冠军楼盘
+            const championVillage = getChampionVillage(1);
+            // console.log(championVillage);
             //  省份地图绘制
-            drawProvinceMap();
+            drawProvinceMap(getProvinceByVillage(data.mapVillage));
+            //  设置省份楼盘的数据
+            _assignmentProvincialRealEstate(championVillage);
         }
     }());
 };

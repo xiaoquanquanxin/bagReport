@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>楼盘详情</title>
+    <script id="utils" src="./js/utils.js"></script>
+    <script>
+        //  加载css
+        ;(function () {
+            loadCss('./css/color.css');
+            loadCss('./css/font.css');
+            loadCss('./css/reset.css');
+        }());
+    </script>
+    <style data-msg="主要">
+        /*主要*/
+        .normal-padding {
+            padding: .34rem .42rem;
+        }
+    </style>
+    <style data-msg="拎包整体">
+        .bag-as-whole {
+            padding-top: 0.24rem;
+        }
+
+        /*拎包整体的内容*/
+        .bag-as-whole-menu {
+            width: 100%;
+        }
+
+        /*默认隐藏*/
+        .bag-as-whole-menu-item {
+            padding-left: 0.46rem;
+        }
+
+        /*这是一个整体结构*/
+        .basic-list-struct {
+            display: flex;
+            justify-content: space-between;
+            color: var(--font-grey);
+            padding: 0.38rem 0 0.32rem;
+            height: 0.65rem;
+            border-bottom: 0.01rem solid var(--494445);
+        }
+
+
+        /*整体li的右面，是个span，里面是数字*/
+        .basic-list-struct > span {
+            line-height: 0.7rem;
+        }
+
+        /*拎包概况截至日*/
+        .basic-list-struct > div > div:last-child {
+            line-height: 0.28rem;
+        }
+
+        /*昨日概况*/
+        .situation-yesterday-general {
+
+        }
+
+        .question-mark {
+            width: 0.16rem;
+            margin-right: 0.04rem;
+        }
+    </style>
+    <style data-msg="日期选择样式">
+        /*日期选择样式*/
+        .select-date {
+            width: 1.4rem;
+            line-height: 0.36rem;
+            height: 0.36rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 0.04rem;
+            overflow: hidden;
+            z-index: +100;
+        }
+
+        /*日期打开的样式*/
+        .select-date-open {
+            height: auto;
+        }
+
+        /*默认日期*/
+        .default-date {
+            justify-content: space-around;
+            display: flex;
+            flex-direction: row;
+            height: 0.36rem;
+            padding: 0 0.06rem;
+        }
+
+        .default-date * {
+            display: flex;
+            align-items: center;
+        }
+
+        .default-date img:first-child {
+            width: 0.26rem;
+        }
+
+        .default-date img:last-child {
+            width: 0.12rem;
+        }
+
+        /*选择时间下拉*/
+        .select-date ul {
+            text-indent: 0.5rem;
+        }
+    </style>
+    <style data-msg="条形统计图的tab">
+        .bar-chart-control {
+            display: flex;
+        }
+
+        /*每一个按钮块*/
+        .bar-chart-control > div {
+            border: 0.02rem solid var(--524E4F);
+            color: var(--AEA6A8);
+            border-radius: 0.06rem;
+            padding: 0.08rem 0.22rem;
+            text-align: justify;
+            margin-right: 0.2rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .bar-chart-control.w17 > div {
+            width: 2rem;
+        }
+
+        .bar-chart-control.w14 > div {
+            width: 1.6rem;
+        }
+
+        .bar-chart-control.w13 > div {
+            width: 1.5rem;
+        }
+
+        .bar-chart-control > div.active-bar-chart {
+            border: 0.02rem solid var(--6A6464);
+            color: var(--FFFDFD);
+            background-color: var(--4A4647);
+        }
+
+        /*按钮块上的箭头,仅有active有*/
+        div.active-bar-chart::after {
+            position: absolute;
+            border: 0.02rem solid var(--6A6464);
+            border-left: none;
+            border-bottom: none;
+            background-color: var(--4A4647);
+            content: '';
+            display: block;
+            top: -0.07rem;
+            left: 50%;
+            width: 0.1rem;
+            height: 0.1rem;
+            margin-left: -0.05rem;
+            transform: rotate(-45deg) skew(15deg, 15deg);
+            transform-origin: center center;
+        }
+    </style>
+</head>
+<body class="bg312D2E">
+<div id="main">
+    <section class="bag-as-whole" style="display: block;padding:0;" data-msg="列表">
+        <menu class="bag-as-whole-menu">
+            <li class="normal-padding bag-as-whole-menu-item">
+                <div class="basic-list-struct" style="border:none;padding: 0;">
+                    <div class="pack-profile-text">
+                        <div class="font14 cFFFFFF section-title">拎包概况0000000</div>
+                        <div class="font10 c858081 is-num">截止2020/20/20 20:32</div>
+                    </div>
+                </div>
+                <ul class="situation-yesterday-general font12">
+                    <li class="basic-list-struct">
+                        <div class="font11 cFFFDFD" style="line-height: 3.2em;">拎包在售楼盘</div>
+                        <span class="font33 is-num cFFFFFF">18</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD section-title">累计销售</div>
+                            <div class="font10">
+                                <span class="c858081">收款金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="c858081">合同金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD section-title">家电套餐</div>
+                            <div class="font10">
+                                <span class="c858081">收款金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="c858081">合同金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD section-title">家私套餐</div>
+                            <div class="font10">
+                                <span class="c858081">收款金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="c858081">合同金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD section-title">智能家居</div>
+                            <div class="font10">
+                                <span class="c858081">收款金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="c858081">合同金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                    <li class="basic-list-struct">
+                        <div>
+                            <div class="font11 cFFFDFD section-title">家装套餐</div>
+                            <div class="font10">
+                                <span class="c858081">收款金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="c858081">合同金额/万元</span>
+                                <span class="cFF6C78 is-num">22488</span>
+                            </div>
+                        </div>
+                        <span class="font33 is-num cFFFFFF">4</span>
+                    </li>
+                </ul>
+            </li>
+        </menu>
+    </section>
+    <section class="normal-padding" data-msg="扇形统计图和条形统计图">
+        <div class="cE8E5E6 font13" style=";position:relative;"
+             chart-control-name="chart-b">
+            <span chart-control-index="0" class="show">各套包合同额占比</span>
+            <span chart-control-index="1" class="hide">各组合套包购买人数占比</span>
+            <div class="select-date">
+                <div class="default-date bg494345">
+                    <img src="./icon/calendar.svg" alt="">
+                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <img src="./icon/selectIcon.svg" alt="">
+                </div>
+                <ul class="cC5BCBE bg494345 font10">
+                    <li>按日</li>
+                    <li>按月</li>
+                    <li class="bg403B3D">按周</li>
+                    <li>3023年</li>
+                </ul>
+            </div>
+        </div>
+        <div data-msg="扇形统计图tab" chart-control-name="chart-b">
+            <div chart-control-index="0" class="show"
+                 style="height: 5rem;margin:0.333rem auto;"
+                 id="pieDiagram1">扇形统计图
+            </div>
+            <div chart-control-index="1" class="hide"
+                 style="height: 3.6rem;margin:0.333rem auto;"
+                 id="barDiagram1">条形统计图
+            </div>
+        </div>
+        <div class="bar-chart-control w14 font9" data-chart-control="chart-b">
+            <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比
+            </div>
+            <div data-chart-control-index="1" data-bind-fn="barDiagram1Fn">各组合套包购买人数占比</div>
+        </div>
+    </section>
+</div>
+<script src="./js/echarts.min.js"></script>
+<script src="./js/zepto/zepto.v1.2.0.min.js"></script>
+<script src="./js/jweixin-1.3.2.js"></script>
+<script>
+    //  加载js
+    ;(function () {
+        if (!getQueryVariable('iswx')) {
+            return;
+        }
+        console.log('是嵌入微信中的');
+        //  Echart配置
+        loadJs("./js/chart.js");
+        //  注册事件
+        loadJs("./js/common.js");
+        //  业务
+        loadJs("./js/housingDetail.js");
+    }());
+</script>
+
+</body>
+</html>

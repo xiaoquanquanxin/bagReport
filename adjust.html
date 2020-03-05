@@ -407,7 +407,7 @@
 
         /*省图信息*/
         .province-map-info {
-            width: 4.98rem;
+            width: 4.8rem;
         }
 
         /*省图信息-头部*/
@@ -747,10 +747,12 @@
         console.log('是嵌入微信中的');
         //  Echart配置
         loadJs("./js/chart.js");
+        //  地图数据
+        loadJs("./js/china.js");
+        //  地图绘制
+        loadJs("./js/drawMap.js");
         //  业务
         loadJs("./js/index.js");
-        //  地图
-        loadJs("./js/china.js");
     }());
 </script>
 <!--测试log-->

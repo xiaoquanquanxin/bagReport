@@ -392,6 +392,45 @@
             z-index: -1;
         }
     </style>
+    <style data-msg="省图">
+        /*省图wrap*/
+        .province-map-main {
+            justify-content: space-between;
+        }
+
+        /*省图*/
+        .province-map {
+            width: 1.68rem;
+            background-color: lightyellow;
+            height: 1.30rem;
+        }
+
+        /*省图信息*/
+        .province-map-info {
+            width: 4.98rem;
+        }
+
+        /*省图信息-头部*/
+        .province-map-info-title {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /*详细数据*/
+        .detailed-data-tip {
+            width: 1.28rem;
+            height: 0.34rem;
+            line-height: 0.34rem;
+            border-radius: 0.03rem;
+        }
+
+        /*省图信息-详情*/
+        .province-map-info-content {
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.06rem;
+        }
+    </style>
 </head>
 <body class="bg312D2E">
 <div id="main">
@@ -402,7 +441,7 @@
             <h2 class="up-title cFFFFFF font20">Sales data statistic</h2>
             <p class="main-title cFFFFFF font18 fw3">实地打造师销售数据统计</p>
         </section>
-        <section class="normal-padding" data-msg="截至"  onclick="location.reload(true);">
+        <section class="normal-padding" data-msg="截至" onclick="location.reload(true);">
             <p class="cFFFFFF font14 section-title">昨日销量</p>
             <p class="c858081 font10">截至 <span>2020/03/00 23:392</span></p>
             <div class="deadline flex">
@@ -527,8 +566,46 @@
                 </li>
             </menu>
         </section>
-        <section   data-msg="地图" id="chinaMap" style="height: 6rem;background-color: lightblue">
-            地图
+        <section data-msg="地图">
+            <div class="normal-padding">
+                <div class=" cE8E5E6 font13" style=";position:relative;">
+                    <br>
+                    <div class="select-date">
+                        <div class="default-date bg494345">
+                            <img src="./icon/calendar.svg" alt="">
+                            <div class="cFFFFFF font10 current-date">请选择</div>
+                            <img src="./icon/selectIcon.svg" alt="">
+                        </div>
+                        <ul class="cC5BCBE bg494345 font10">
+                            <li>按日</li>
+                            <li>按月</li>
+                            <li class="bg403B3D">按周</li>
+                            <li>3023年</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="chinaMap" style="height: 5rem;"></div>
+        </section>
+        <section data-msg="省图" class="normal-padding flex province-map-main">
+            <div class="province-map" id="provinceMap"></div>
+            <div class="province-map-info">
+                <div class="cE8E5E6 font13 flex province-map-info-title">
+                    <span style="display: flex;align-items: center">
+                        <span class="cFF6C78 font16">广州常春藤</span>
+                    <span class="c858081 font10">（昨日数据）</span>
+                    </span>
+                    <span class="bg494345 cFFFFFF font10 detailed-data-tip text-center">详细数据&gt;</span>
+                </div>
+                <ul class="flex province-map-info-content text-center">
+                    <li><p class="font9 cE8E5E6">拎包认购数</p>
+                        <p class="font25 cFFFFFF is-num">2</p></li>
+                    <li><p class="font9 cE8E5E6">拎包合同额<span class="c858081">/万</span></p>
+                        <p class="font25 cFFFFFF is-num">3</p></li>
+                    <li><p class="font9 cE8E5E6">拎包收款额<span class="c858081">/万</span></p>
+                        <p class="font25 cFFFFFF is-num">3.3</p></li>
+                </ul>
+            </div>
         </section>
         <section class="normal-padding" data-msg="扇形统计图和条形统计图">
             <div class="cE8E5E6 font13" style=";position:relative;"
@@ -674,8 +751,6 @@
         loadJs("./js/index.js");
         //  地图
         loadJs("./js/china.js");
-        //
-        loadJs("./js/aaa.js");
     }());
 </script>
 <!--测试log-->

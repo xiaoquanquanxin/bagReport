@@ -38,8 +38,8 @@ window.onload = function () {
             // console.log($barChartControl);
             $barChartControl.on('click', function (e) {
                 const $target = $(e.target);
-                console.log($target);
-                console.log($target.data('bind-fn'));
+                // console.log($target);
+                // console.log($target.data('bind-fn'));
                 //  先改变样式
                 $target
                     .addClass('active-bar-chart')
@@ -212,7 +212,7 @@ window.onload = function () {
                 // console.log(value)
                 //  边框宽度 === 数据换算成rem的值 * 0.707 + 保底的0.14 rem
                 const borderWidth = value * 0.707 + 0.14;
-                console.log(borderWidth);
+                // console.log(borderWidth);
                 //  右侧淡色小方块
                 $self.find('div').css({
                     borderWidth: `${borderWidth}rem`,
@@ -233,6 +233,8 @@ window.onload = function () {
             brokenLineDiagram1Fn();
             //  中国地图绘制
             drawChinaMap();
+            //  省份地图绘制
+            drawProvinceMap();
         }());
     }());
 };

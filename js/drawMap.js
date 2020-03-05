@@ -171,7 +171,7 @@ function drawChinaMap(data) {
                     item.position = item.position.map(function (item) {
                         return item * WINDOW_WIDTH_RATE;
                     });
-                    console.log(item.position);
+                    // console.log(item.position);
                 }
                 return item;
             })
@@ -181,7 +181,7 @@ function drawChinaMap(data) {
         function getChinaMapOption(seriesData) {
             //  重新计算的数据
             const _seriesData = formattingSeriesData(seriesData);
-            console.log(_seriesData);
+            // console.log(_seriesData);
             return {
                 backgroundColor: '#312D2E',
                 // backgroundColor: 'lightblue',
@@ -222,7 +222,7 @@ function drawChinaMap(data) {
                 //  地图映射
                 visualMap: {
                     bottom: 10,
-                    left: 10,
+                    left: 24,
                     itemWidth: 9,
                     itemHeight: 4,
                     textStyle: {
@@ -295,6 +295,55 @@ function drawChinaMap(data) {
             myChart.setOption(getChinaMapOption(seriesData));
         })
     }())
-};
+}
 
 //  某个省份的地图绘制
+function drawProvinceMap(provinceName) {
+    provinceName = provinceName || 'guangdong';
+    loadJs(`./js/mapData/province/${provinceName}.js`, provinceName, true, function () {
+        _drawProvinceMap(provinceName)
+    });
+}
+
+function _drawProvinceMap(provinceName) {
+    console.log(provinceName);
+    const option = {
+        series: [
+            {
+                type: 'map',
+                roam: false,
+                zoom: 1,
+                selectedMode: 'single',
+                mapType: provinceName,
+                label: {
+                    normal: {
+                        show: true,
+                        //  省份标签字体颜色
+                        textStyle: {color: "#4A4647"}
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {color: "#4A4647"}
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        borderWidth: .5,//区域边框宽度
+                        borderColor: '#0550c3',//区域边框颜色
+                        areaColor: "#4ea397",//区域颜色
+
+                    },
+                    emphasis: {
+                        borderWidth: .5,
+                        borderColor: '#4b0082',
+                        areaColor: "#ece39e",
+                    }
+                },
+            }
+        ]
+    };
+
+    const myChart = echarts.init(provinceMap);
+    myChart.setOption(option);
+
+}

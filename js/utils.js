@@ -38,11 +38,34 @@ function getDate() {
 }
 
 //  加载js
-function loadJs(src) {
+function loadJs(src, scriptId, singlePass, loadCallback) {
     const script = document.createElement('script');
     script.type = "text/javascript";
-    script.src = `${src}?v=${getDate()}`;
+    //  如果需要拼接随机数
+    if (!singlePass) {
+        src = `${src}?v=${getDate()}`;
+    }
+    // console.log(src);
+    script.src = src;
+    if (scriptId) {
+        script.id = scriptId;
+    }
     document.body.appendChild(script);
+    if (!loadCallback) {
+        return;
+    }
+    if (script.addEventListener) {
+        script.addEventListener('load', function () {
+            loadCallback();
+        }, false);
+    } else if (script.attachEvent) {
+        script.attachEvent('onreadystatechange', function () {
+            var target = window.event.srcElement;
+            if (target.readyState === 'loaded') {
+                loadCallback();
+            }
+        });
+    }
 }
 
 //  加载css

@@ -78,6 +78,8 @@
 
     /*累计销售冠军楼盘*/
     --979797: #979797;
+    --FFDEE3: #FFDEE3;
+    --F77D8D: #F77D8D;
 }
 
 
@@ -171,6 +173,9 @@
     background: var(--4B4547);
 }
 
+.bgFFDEE3{
+    background-color: var(--FFDEE3);
+}
 /*.cAEA6A8 {*/
 /*    color: var(--AEA6A8);*/
 /*}*/

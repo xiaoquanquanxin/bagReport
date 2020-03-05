@@ -26,8 +26,8 @@ function getQueryVariable(variable) {
 }
 
 //  获得日期
-function getDate() {
-    const date = new Date();
+function getDate(specificTime) {
+    const date = specificTime ? specificTime : new Date();
     const YEAR = date.getFullYear();
     const MONTH = date.getMonth() + 1;
     const DATE = date.getDate();

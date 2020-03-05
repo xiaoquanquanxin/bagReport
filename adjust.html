@@ -6,7 +6,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>拎包报表</title>
-    <script id="utils" src="./js/utils.js"></script>
+    <script id="utils" src="./js/utils.js?v=1"></script>
+    <script>
+        //  加载css
+        ;(function () {
+            loadCss('./css/color.css');
+            loadCss('./css/font.css');
+            loadCss('./css/reset.css');
+        }());
+    </script>
     <style data-msg="拎包业务">
         /*主要*/
         .normal-padding {
@@ -475,19 +483,12 @@
             </ul>
         </div>
     </section>
-    <section class="normal-padding" data-msg="累计销售数量">
-        <p class="cFFFFFF font14 section-title">累计销售数量</p>
-        <p class="c858081 font10">起始日期 <span>2020/02/08</span></p>
-        <div id="brokenLineDiagram1" style="height: 3.4rem;">
-            条形统计图
-        </div>
-    </section>
     <section class="bag-as-whole" style="display: block;padding:0;" data-msg="列表">
         <menu class="bag-as-whole-menu">
             <li class="normal-padding bag-as-whole-menu-item">
                 <div class="basic-list-struct" style="border:none;padding: 0;">
                     <div class="pack-profile-text">
-                        <div class="font14 cFFFFFF section-title">拎包概况0000000</div>
+                        <div class="font14 cFFFFFF section-title">拎包概况</div>
                         <div class="font10 c858081 is-num">截止2020/20/20 20:32</div>
                     </div>
                 </div>
@@ -560,6 +561,13 @@
             </li>
         </menu>
     </section>
+    <section class="normal-padding" data-msg="累计销售数量">
+        <p class="cFFFFFF font14 section-title">累计销售数量</p>
+        <p class="c858081 font10">起始日期 <span>2020/02/08</span></p>
+        <div id="brokenLineDiagram1" style="height: 3.4rem;">
+            条形统计图
+        </div>
+    </section>
     <section data-msg="地图">
         <div class="normal-padding">
             <div class=" cE8E5E6 font13" style=";position:relative;">
@@ -589,7 +597,7 @@
                         <span class="cFF6C78 font16">广州常春藤</span>
                     <span class="c858081 font10">（昨日数据）</span>
                     </span>
-                <span class="bg494345 cFFFFFF font10 detailed-data-tip text-center">详细数据&gt;</span>
+                <span class="bg494345 cFFFFFF font10 detailed-data-tip text-center" id="detailData">详细数据&gt;</span>
             </div>
             <ul class="flex province-map-info-content text-center">
                 <li><p class="font9 cE8E5E6">拎包认购数</p>
@@ -723,13 +731,6 @@
 <script src="./js/zepto/zepto.v1.2.0.min.js"></script>
 <script src="./js/jweixin-1.3.2.js"></script>
 <script>
-    //  加载css
-    ;(function () {
-        loadCss('./css/color.css');
-        loadCss('./css/font.css');
-        loadCss('./css/reset.css');
-    }());
-
     //  加载js
     ;(function () {
         if (!getQueryVariable('iswx')) {
@@ -742,6 +743,8 @@
         loadJs("./js/mapData/china.js");
         //  地图绘制
         loadJs("./js/drawMap.js");
+        //  注册事件
+        loadJs("./js/common.js");
         //  业务
         loadJs("./js/adjust.js");
     }());

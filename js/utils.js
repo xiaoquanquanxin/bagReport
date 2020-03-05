@@ -80,7 +80,7 @@ function loadCss(href) {
 function wxNavigateTo(pageUrl, params) {
     params = params || {};
     params = Object.assign(params, {iswx: true, v: Math.random()});
-    console.log(params);
+    // console.log(params);
     //  拼接搜索的参数
     const searchUrl = Object.keys(params).reduce(function (pre, current) {
         return `${pre}${current}=${params[current]}&`;
@@ -91,27 +91,3 @@ function wxNavigateTo(pageUrl, params) {
         url: `/pages/outLine/outLine?url=${encodeURIComponent(url)}`,
     });
 }
-
-//  跳转页面地址
-const PageUrlList = {
-    //  进展列表
-    messageList: `${window.location.origin}/messageList.html`,
-    //  进展详情
-    messageDetail: `${window.location.origin}/messageDetail.html`,
-
-};
-// /**
-//  * 在onload之后加载业务js
-//  * @fn:function 业务js方法
-//  * */
-// function addProfessionJs(fn) {
-//     const onloadFn = window.onload;
-//     if (typeof onloadFn === "function") {
-//         window.onload = function () {
-//             onloadFn();
-//             fn();
-//         }
-//     } else {
-//         window.onload = fn;
-//     }
-// }

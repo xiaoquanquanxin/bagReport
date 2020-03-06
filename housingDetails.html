@@ -169,79 +169,79 @@
 </head>
 <body class="bg312D2E">
 <div id="main">
-    <section class="bag-as-whole" style="display: block;padding:0;" data-msg="列表">
+    <section class="bag-as-whole" style=";padding:0;" data-msg="列表">
         <menu class="bag-as-whole-menu">
             <li class="normal-padding bag-as-whole-menu-item">
                 <div class="basic-list-struct" style="border:none;padding: 0;">
                     <div class="pack-profile-text">
-                        <div class="font14 cFFFFFF section-title">拎包概况0000000</div>
-                        <div class="font10 c858081 is-num">截止2020/20/20 20:32</div>
+                        <div class="font14 cFFFFFF section-title">拎包概况</div>
+                        <div class="font10 c858081 is-num">截至 <span id="dueDateSurvey"></span></div>
                     </div>
                 </div>
                 <ul class="situation-yesterday-general font12">
                     <li class="basic-list-struct">
                         <div class="font11 cFFFDFD" style="line-height: 3.2em;">拎包在售楼盘</div>
-                        <span class="font33 is-num cFFFFFF">18</span>
+                        <span class="font33 is-num cFFFFFF" id="realEstateOnSale">0</span>
                     </li>
                     <li class="basic-list-struct">
                         <div>
                             <div class="font11 cFFFDFD section-title">累计销售</div>
                             <div class="font10">
                                 <span class="c858081">收款金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="cFF6C78 is-num" id="TotalReceives">0</span>&emsp;&emsp;
                                 <span class="c858081">合同金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>
+                                <span class="cFF6C78 is-num" id="TotalContract">0</span>
                             </div>
                         </div>
-                        <span class="font33 is-num cFFFFFF">4</span>
+                        <span class="font33 is-num cFFFFFF" id="TotalHandBag">0</span>
                     </li>
                     <li class="basic-list-struct">
                         <div>
                             <div class="font11 cFFFDFD section-title">家电套餐</div>
                             <div class="font10">
                                 <span class="c858081">收款金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="cFF6C78 is-num" id="TotalFamilyElectricReceives">0</span>&emsp;&emsp;
                                 <span class="c858081">合同金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>
+                                <span class="cFF6C78 is-num" id="TotalFamilyElectricContract">0</span>
                             </div>
                         </div>
-                        <span class="font33 is-num cFFFFFF">4</span>
+                        <span class="font33 is-num cFFFFFF" id="TotalFamilyElectric">0</span>
                     </li>
                     <li class="basic-list-struct">
                         <div>
                             <div class="font11 cFFFDFD section-title">家私套餐</div>
                             <div class="font10">
                                 <span class="c858081">收款金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
-                                <span class="c858081">合同金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>
+                                <span class="cFF6C78 is-num" id="TotalFamilyPropertyReceives">0</span>&emsp;&emsp;
+                                <span class="c858081" id="">合同金额/万元</span>
+                                <span class="cFF6C78 is-num" id="TotalFamilyPropertyContract">0</span>
                             </div>
                         </div>
-                        <span class="font33 is-num cFFFFFF">4</span>
+                        <span class="font33 is-num cFFFFFF" id="TotalFamilyProperty">0</span>
                     </li>
                     <li class="basic-list-struct">
                         <div>
                             <div class="font11 cFFFDFD section-title">智能家居</div>
                             <div class="font10">
                                 <span class="c858081">收款金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="cFF6C78 is-num" id="TotalSmartHomeReceives">0</span>&emsp;&emsp;
                                 <span class="c858081">合同金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>
+                                <span class="cFF6C78 is-num" id="TotalSmartHomeContract">0</span>
                             </div>
                         </div>
-                        <span class="font33 is-num cFFFFFF">4</span>
+                        <span class="font33 is-num cFFFFFF" id="TotalSmartHome">0</span>
                     </li>
                     <li class="basic-list-struct">
                         <div>
                             <div class="font11 cFFFDFD section-title">家装套餐</div>
                             <div class="font10">
                                 <span class="c858081">收款金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>&emsp;&emsp;
+                                <span class="cFF6C78 is-num" id="TotalFamilyDecorationReceives">0</span>&emsp;&emsp;
                                 <span class="c858081">合同金额/万元</span>
-                                <span class="cFF6C78 is-num">22488</span>
+                                <span class="cFF6C78 is-num" id="TotalFamilyDecorationContract">0</span>
                             </div>
                         </div>
-                        <span class="font33 is-num cFFFFFF">4</span>
+                        <span class="font33 is-num cFFFFFF" id="TotalFamilyDecoration">0</span>
                     </li>
                 </ul>
             </li>
@@ -252,33 +252,28 @@
              chart-control-name="chart-b">
             <span chart-control-index="0" class="show">各套包合同额占比</span>
             <span chart-control-index="1" class="hide">各组合套包购买人数占比</span>
-            <div class="select-date">
+            <div class="select-date" data-value="-1" data-bind-fn="rate" id="selectDateRate">
                 <div class="default-date bg494345">
                     <img src="./icon/calendar.svg" alt="">
-                    <div class="cFFFFFF font10 current-date">请选择</div>
+                    <div class="cFFFFFF font10 current-date">昨日</div>
                     <img src="./icon/selectIcon.svg" alt="">
                 </div>
                 <ul class="cC5BCBE bg494345 font10">
-                    <li>按日</li>
-                    <li>按月</li>
-                    <li class="bg403B3D">按周</li>
-                    <li>3023年</li>
+                    <li data-value="-1" class="bg403B3D">昨日</li>
+                    <li data-value="1">总的</li>
                 </ul>
             </div>
         </div>
         <div data-msg="扇形统计图tab" chart-control-name="chart-b">
             <div chart-control-index="0" class="show"
                  style="height: 5rem;margin:0.333rem auto;"
-                 id="pieDiagram1">扇形统计图
-            </div>
+                 id="pieDiagram1"></div>
             <div chart-control-index="1" class="hide"
                  style="height: 3.6rem;margin:0.333rem auto;"
-                 id="barDiagram1">条形统计图
-            </div>
+                 id="barDiagram1"></div>
         </div>
         <div class="bar-chart-control w14 font9" data-chart-control="chart-b">
-            <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比
-            </div>
+            <div data-chart-control-index="0" data-bind-fn="pieDiagram1Fn" class="active-bar-chart">各套包合同额占比</div>
             <div data-chart-control-index="1" data-bind-fn="barDiagram1Fn">各组合套包购买人数占比</div>
         </div>
     </section>
@@ -286,6 +281,7 @@
 <script src="./js/echarts.min.js"></script>
 <script src="./js/zepto/zepto.v1.2.0.min.js"></script>
 <script src="./js/jweixin-1.3.2.js"></script>
+<script src="./js/data.js"></script>
 <script>
     //  加载js
     ;(function () {

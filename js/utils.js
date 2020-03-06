@@ -51,7 +51,7 @@ function loadJs(src, scriptId, singlePass, loadCallback) {
     //  如果需要拼接随机数
     if (!singlePass) {
         const date = getDate();
-        src = `${src}?v=${date.YEAR}.${date.MONTH}.${date.DATE}`;
+        src = `${src}?v=${date.YEAR}.${date.MONTH}.${date.DATE}.${Math.random()}`;
     }
     // console.log(src);
     script.src = src;

@@ -255,22 +255,42 @@ function drawChinaMap(markValue, data) {
                 // backgroundColor: 'lightblue',
                 //  弹框
                 tooltip: {
+                    //  允许操作
+                    enterable: true,
                     trigger: 'item',
                     formatter: function (params) {
                         // console.clear();
-                        if (params.data.village) {
+                        // console.log(params);
+                        const villages = params.data.village;
+                        params.data.village[0] = '广州常春藤';
+                        if (villages) {
                             // console.log(params.data.village);
-                            const arr = params.data.village.map(function (item, index) {
-                                if (index === 0) {
+                            //  是否 mapChooseVillageName.innerText 对应某个楼盘
+                            let hasChooseVillage = false;
+                            const arr = villages.map(function (item, index) {
+                                //  如果有对应的，楼盘，设置颜色
+                                if (item === mapChooseVillageName.innerText) {
+                                    hasChooseVillage = true;
                                     return `<div class="map-tooltip cFF6C78 font10">${item}</div>`;
                                 }
                                 return `<div class="map-tooltip c858081 font10">${item}</div>`;
                             });
+                            //  如果没有对应楼盘
+                            if (!hasChooseVillage) {
+                                arr[0] = `<div class="map-tooltip cFF6C78 font10">${villages[0]}</div>`;
+                                //  被选中的那个小区，应该把这个数据渲染到省份那里
+                                const village = requestData.mapVillage[villages[0]];
+                                console.log(village);
+                            }
                             arr.push('<div class="map-tooltip-triangle"></div>');
                             return arr.join('');
                         }
+                        // $('*').css({
+                        //     'pointer-events': 'all',
+                        // })
                         return '';
                     },
+
                     backgroundColor: '#FFFFFF',
                     borderRadius: 0,
                     extraCssText: 'box-shadow: 0 3px 0  #D75E68;',
@@ -349,9 +369,9 @@ function drawChinaMap(markValue, data) {
                     zoom: 1,
                     top: 0,
                     bottom: 0,
-                    // center: [100.97, 38.71],
-                    roam: false,
+                    // center: [100.97, 38.71],,
                     data: _seriesData,
+                    roam: false,
                     itemStyle: {
                         borderColor: "#312D2E",
                     }
@@ -372,6 +392,40 @@ function drawChinaMap(markValue, data) {
         });
     }());
 }
+
+//  地图
+const $chinaMap = $('#chinaMap');
+//  地图点出来的mapTOolTip，点击某个楼盘
+$chinaMap.on('click', function (e) {
+    const $target = $(e.target);
+    //  如果不是map-tooltip
+    if (!$target.hasClass('map-tooltip')) {
+        return;
+    }
+    //  移除高亮
+    $target.siblings('.cFF6C78').removeClass('cFF6C78').addClass('c858081');
+    //  设置高亮
+    $target.addClass('cFF6C78');
+
+
+    //  被选中的那个小区，应该把这个数据渲染到省份那里
+    const villageName = $target.text();
+    const village = requestData.mapVillage[villageName];
+
+    //  昨天？总的？
+    const dateValue = $chinaMap.parents('section').find('.select-date').data('value');
+
+    // debugger;
+    //  用于渲染的数据
+    const aimData = {name: villageName};
+    getVillageRenderData(aimData, village, dateValue);
+    // console.log(aimData);
+    //  设置省份楼盘的数据
+    _assignmentProvincialRealEstate(aimData);
+    //  隐藏父级
+    $target.parent('div').hide();
+});
+
 
 //  某个省份的地图绘制
 function drawProvinceMap(provinceSpell, provinceName,) {
@@ -424,27 +478,37 @@ function getChampionVillage(markValue) {
             name: item,
         };
         const ITEM = requestData.mapVillage[item];
-        switch (markValue) {
-            case -1:
-                //  拎包认购数
-                data.__room = ITEM.YesterdayRoom || 0;
-                //  拎包合同额
-                data.__contractValue = ITEM.YesterdayContract || 0;
-                //  拎包收款额
-                data.__receives = ITEM.YesterdayReceives || 0;
-                break;
-            case 1:
-                data.__contractValue = ITEM.TotalContract || 0;
-                data.__room = ITEM.TotalRoom || 0;
-                data.__receives = ITEM.TotalReceives || 0;
-                break;
-            default :
-                throw new Error('getChampionVillage - xx');
-        }
+        getVillageRenderData(data, ITEM, markValue);
         // console.log(ITEM.TotalRoom, ITEM.YesterdayRoom );
         arr.push(data);
     });
     return arr.sort(function (a, b) {
         return b.__contractValue - a.__contractValue;
     })[0];
+}
+
+//  获取楼盘数据，用于渲染省份哪里的字段
+/**
+ * @param:aimData 目标对象
+ * @param:originData 原对象，从上面抽取值
+ * @param:markValue 昨天：-1 总的：1
+ * */
+function getVillageRenderData(aimData, originData, markValue) {
+    markValue = markValue || -1;
+    switch (markValue) {
+        case -1:
+            //  拎包认购数
+            aimData.__room = originData.YesterdayRoom || 0;
+            //  拎包合同额
+            aimData.__contractValue = originData.YesterdayContract || 0;
+            //  拎包收款额
+            aimData.__receives = originData.YesterdayReceives || 0;
+            break;
+        case 1:
+            aimData.__contractValue = originData.TotalContract || 0;
+            aimData.__room = originData.TotalRoom || 0;
+            aimData.__receives = originData.TotalReceives || 0;
+            break;
+        default :
+    }
 }

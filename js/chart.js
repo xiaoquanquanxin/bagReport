@@ -454,12 +454,16 @@ function getArrayByFieldAsSubtraction(array, field1, field2) {
 
 
 //  折线统计图————套餐销售数量
-function brokenLineDiagram1Fn() {
+function brokenLineDiagram1Fn(data) {
+    //  转换格式
+    const _data = {
+        x: [],
+        v: [],
+    };
+    data.forEach(function (item) {
+        _data.x.push(item.week);
+        _data.v.push(item.sales);
+    });
     const myChart = echarts.init(brokenLineDiagram1);
-    myChart.setOption(packageSalesQuantity(
-        {
-            "x": ["11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20", "11.04", "11.11", "11.18", "11.25", "12.02", "12.09", "12.16", "12.23", "12.30", "01.06", "01.13", "01.20"],
-            "v": ["24", "211", "280", "576", "397", "377", "341", "900", "727", "181", "255", "33", "24", "211", "280", "576", "397", "377", "341", "700", "727", "181", "255", "33"]
-        }
-    ));
+    myChart.setOption(packageSalesQuantity(_data));
 }

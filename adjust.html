@@ -440,7 +440,6 @@
 </head>
 <body class="bg312D2E">
 <div id="main">
-    <div style="display: none;">
     <section class="normal-padding" onclick="location.reload(true);">
         <h2 class="up-title cFFFFFF font20 is-num">Sales data statistic</h2>
         <p class="main-title cFFFFFF font18 fw3">实地打造师销售数据统计</p>
@@ -563,7 +562,13 @@
             </li>
         </menu>
     </section>
-
+    <section class="normal-padding" data-msg="累计销售数量">
+        <p class="cFFFFFF font14 section-title">累计销售数量</p>
+        <p class="c858081 font10">起始日期 <span>2020/02/08</span></p>
+        <div id="brokenLineDiagram1" style="height: 3.4rem;">
+            条形统计图
+        </div>
+    </section>
     <section data-msg="地图">
         <div class="normal-padding">
             <div class="cE8E5E6 font13" style=";position:relative;">
@@ -601,14 +606,6 @@
                 <li><p class="font9 cE8E5E6">拎包收款额<span class="c858081">/万</span></p>
                     <p class="font25 cFFFFFF is-num" id="mapChooseReceives">0</p></li>
             </ul>
-        </div>
-    </section>
-    </div>
-    <section class="normal-padding" data-msg="累计销售数量">
-        <p class="cFFFFFF font14 section-title">累计销售数量</p>
-        <p class="c858081 font10">起始日期 <span>2020/02/08</span></p>
-        <div id="brokenLineDiagram1" style="height: 3.4rem;">
-            条形统计图
         </div>
     </section>
     <section class="normal-padding" data-msg="扇形统计图和条形统计图">

@@ -46,7 +46,7 @@ window.onload = function () {
         _assignmentSalesChampion(data.mapVillage, data.totalTopSales);
         _assignmentNationalProjects(data.mapVillage);
         //  上面的折线统计图
-        brokenLineDiagram1Fn();
+        brokenLineDiagram1Fn(data.weekSales);
 
 
         //  默认绘制扇形统计图

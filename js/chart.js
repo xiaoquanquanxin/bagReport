@@ -55,8 +55,10 @@ const proportionContractValuePackage = function (data) {
 
 //  各组合套包购买人数占比
 const proportionNumberForCombinationPackage = function (data) {
-    const n = 28;
-    const interval = 14;
+    console.log(data);
+    const n = data.length;
+    //  一屏最多展示几个
+    const interval = 13;
     return {
         color: colorConfig,
         animation: false,
@@ -80,7 +82,12 @@ const proportionNumberForCombinationPackage = function (data) {
         xAxis: [
             {
                 type: 'category',
-                data: ['10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32', '10/32'],
+                data: (function () {
+                    return data.map(function (item) {
+                        // console.log(item.SaleDate);
+                        return item.SaleDate.slice(5).replace('-', '/');
+                    })
+                }()),
                 //  轴线
                 axisLine: {
                     lineStyle: {
@@ -124,31 +131,37 @@ const proportionNumberForCombinationPackage = function (data) {
                 },
             }
         ],
+
+
+        // 家电的数量为 OneNum - TwoNum
+        // 家电家私的数量为 TwoNum - ThreeNum
+        // 家电家私智能的数量 为ThreeNum
+        // 其他的数量为 TotalNum - OneNum
         series: [
             {
                 name: '仅家电',
                 type: 'bar',
                 stack: '1',
-                data: [10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20],
+                data: getArrayByFieldAsSubtraction(data, 'OneNum', 'TwoNum'),
                 barWidth: 10,
             },
             {
                 name: '家电家私',
                 type: 'bar',
                 stack: '1',
-                data: [20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30],
+                data: getArrayByFieldAsSubtraction(data, 'TwoNum', 'ThreeNum'),
             },
             {
                 name: '家电家私智能',
                 type: 'bar',
                 stack: '1',
-                data: [40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10]
+                data: getArrayByFieldAsSubtraction(data, 'ThreeNum', null),
             },
             {
                 name: '其他',
                 type: 'bar',
                 stack: '1',
-                data: [30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40, 10, 20, 30, 40],
+                data: getArrayByFieldAsSubtraction(data, 'TotalNum', 'OneNum'),
             },
         ],
         //  滚动
@@ -393,9 +406,52 @@ function pieDiagram1Fn(markValue) {
 function barDiagram1Fn() {
     //  不要昨日，总的那个时间了
     $('#selectDateRate').hide();
+
+    //  有楼盘的name，说明是详情页数据
+    const village = getQueryVariable('village');
+    //  整理数据
+    let data = null;
+    // debugger
+    if (village) {
+        data = requestData.villageSalesType[decodeURIComponent(village)];
+    } else {
+        data = requestData.totalSalesType;
+    }
+    const arr = setMapAsArray(data);
+    // console.log(arr);
     const myChart = echarts.init(barDiagram1);
-    myChart.setOption(proportionNumberForCombinationPackage());
+    myChart.setOption(proportionNumberForCombinationPackage(arr));
 }
+
+//  将对象转为数组
+function setMapAsArray(array) {
+    //  存放数据
+    let arr = [];
+    Object.keys(array).forEach(function (item) {
+        // console.log(item, data[item]);
+        arr.push(array[item]);
+    });
+    arr = arr.sort(function (a, b) {
+        return new Date(a.SaleDate.replace(/-/g, "/")).getTime() - new Date(b.SaleDate.replace(/-/g, "/")).getTime();
+    });
+    return arr;
+}
+
+//  从某个array中的item中，按照某个字段取出一个对应的array
+function getArrayByField(array, field) {
+    return array.map(function (item) {
+        return item[field];
+    })
+}
+
+//  从某个array中的item中，按照某个字段取出一个对应的array
+function getArrayByFieldAsSubtraction(array, field1, field2) {
+    return array.map(function (item) {
+        const value = (item[field1] || 0) - (item[field2] || 0);
+        return Math.floor(value / (item.TotalNum || 0) * 100);
+    });
+}
+
 
 //  折线统计图————套餐销售数量
 function brokenLineDiagram1Fn() {

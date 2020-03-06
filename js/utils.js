@@ -37,10 +37,6 @@ function getDate(specificTime) {
         MONTH: MONTH,
         DATE: DATE,
     };
-    //  todo    测试版
-    // return `${YEAR}.${MONTH}.${DATE}.${date.getTime()}`;
-    //  todo    正式版
-    // return `${YEAR}.${MONTH}.${DATE}`;
 }
 
 //  补全零
@@ -102,4 +98,10 @@ function wxNavigateTo(pageUrl, params) {
     wx.miniProgram.navigateTo({
         url: `/pages/outLine/outLine?url=${encodeURIComponent(url)}`,
     });
+}
+
+
+//  数据精确到万
+function correctToWan(num) {
+    return Math.round(num / 10000);
 }

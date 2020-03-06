@@ -195,7 +195,7 @@ function drawChinaMap(markValue, data) {
             '#B05C5C',
             '#7D6464',
             '#858383',
-            '#4A4647',
+            '#3A3637',
         ];
 
         //  格式化系列数据
@@ -289,17 +289,18 @@ function drawChinaMap(markValue, data) {
                 },
                 //  地图映射
                 visualMap: {
+                    itemGap: 5,
                     bottom: 10,
                     left: 24,
                     itemWidth: 9,
                     itemHeight: 4,
                     textStyle: {
-                        color: '#fff',
+                        color: '#858081',
                         fontSize: 8,
                     },
                     padding: 0,
                     pieces: [
-                        {value: -1, max: -Infinity, label: '-'},
+                        {value: -1, max: -Infinity, label: '无项目'},
                         {value: 0, label: '无销售'},
                         {min: 1, max: 500, label: '<500万'},
                         {min: 500, max: 1000, label: '500万-1000万'},
@@ -440,6 +441,7 @@ function getChampionVillage(markValue) {
             default :
                 throw new Error('getChampionVillage - xx');
         }
+        // console.log(ITEM.TotalRoom, ITEM.YesterdayRoom );
         arr.push(data);
     });
     return arr.sort(function (a, b) {

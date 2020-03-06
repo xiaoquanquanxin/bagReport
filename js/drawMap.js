@@ -283,12 +283,16 @@ function drawChinaMap(markValue) {
                             }
                             console.log(villageName);
 
+                            //  用于渲染的数据
+                            const aimData = {name: villageName};
+                            const village = requestData.mapVillage[villageName];
+                            getVillageRenderData(aimData, village, markValue);
+                            // console.log(aimData);
+                            //  设置省份楼盘的数据
+                            _assignmentProvincialRealEstate(aimData);
                             arr.push('<div class="map-tooltip-triangle"></div>');
                             return arr.join('');
                         }
-                        // $('*').css({
-                        //     'pointer-events': 'all',
-                        // })
                         return '';
                     },
 
@@ -414,12 +418,12 @@ $chinaMap.on('click', function (e) {
     const village = requestData.mapVillage[villageName];
 
     //  昨天？总的？
-    const dateValue = $chinaMap.parents('section').find('.select-date').data('value');
+    const markValue = $chinaMap.parents('section').find('.select-date').data('value');
 
     // debugger;
     //  用于渲染的数据
     const aimData = {name: villageName};
-    getVillageRenderData(aimData, village, dateValue);
+    getVillageRenderData(aimData, village, markValue);
     // console.log(aimData);
     //  设置省份楼盘的数据
     _assignmentProvincialRealEstate(aimData);

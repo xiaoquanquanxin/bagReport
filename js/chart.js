@@ -347,12 +347,12 @@ const packageSalesQuantity = function (data) {
 /**
  * 扇形统计图————各套包合同额占比
  * @param:markValue 标记值，-1昨日，1总的
- * @param:data 数据
  * */
-function pieDiagram1Fn(markValue, data) {
+function pieDiagram1Fn(markValue) {
+    //  展示 昨日，总的那个时间了
+    $('#selectDateRate').show();
     //  自绑定一下数据哈
-    data = data || pieDiagram1Fn.data;
-    pieDiagram1Fn.data = data;
+    const data = requestData.yesterdayAndTotalSale;
     const myChart = echarts.init(pieDiagram1);
     //  数据
     const list = [];
@@ -394,6 +394,8 @@ function pieDiagram1Fn(markValue, data) {
 
 //  条形统计图————各组合套包购买人数占比
 function barDiagram1Fn() {
+    //  不要昨日，总的那个时间了
+    $('#selectDateRate').hide();
     const myChart = echarts.init(barDiagram1);
     myChart.setOption(proportionNumberForCombinationPackage());
 }

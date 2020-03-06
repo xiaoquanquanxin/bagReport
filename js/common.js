@@ -44,6 +44,9 @@ function _eventSelectDate(selectCallback) {
                 $('.map-tooltip').parent('div').hide();
             }, 0);
         } else if (bindFn === 'rate') {
+            console.log('我是扇形统计图');
+            console.log(bindFn);
+            pieDiagram1Fn($value);
 
         }
 
@@ -92,6 +95,7 @@ function _eventUpwardTriangleButtonClick() {
             //  找到父级section元素，下面的日期选择
             const value = $target.parents('section').find('.select-date').data('value');
             console.log(value);
+            console.log(fnName)
             window[fnName](value);
         }
         e.stopPropagation();

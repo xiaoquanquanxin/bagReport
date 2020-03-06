@@ -14,6 +14,7 @@ window.onload = function () {
         // });
         //  fixme   调试
         requestCallback(mainData);
+
         function requestCallback(data) {
             console.log(data);
             // console.log(data.yesterdayAndTotalSale);
@@ -30,7 +31,7 @@ window.onload = function () {
             const village = decodeURIComponent(getQueryVariable('village'));
             _assignmentRealEstateOnSale(data.mapVillage[village], 1);
             //  默认绘制扇形统计图
-            pieDiagram1Fn(-1);
+            pieDiagram1Fn(-1, data.mapVillage[village]);
         }
     }());
 };

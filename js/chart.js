@@ -358,11 +358,14 @@ const packageSalesQuantity = function (data) {
  * 扇形统计图————各套包合同额占比
  * @param:markValue 标记值，-1昨日，1总的
  * */
-function pieDiagram1Fn(markValue) {
+function pieDiagram1Fn(markValue, data) {
     //  展示 昨日，总的那个时间了
     $('#selectDateRate').show();
-    //  自绑定一下数据哈
-    const data = requestData.yesterdayAndTotalSale;
+    // 自绑定一下数据哈
+    data = data || pieDiagram1Fn.data;
+    // data = data || pieDiagram1Fn;
+    pieDiagram1Fn.data = data;
+    // const data = requestData.yesterdayAndTotalSale;
     const myChart = echarts.init(pieDiagram1);
     //  数据
     const list = [];

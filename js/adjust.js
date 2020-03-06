@@ -50,7 +50,7 @@ window.onload = function () {
 
 
         //  默认绘制扇形统计图
-        pieDiagram1Fn(-1);
+        pieDiagram1Fn(-1, data.yesterdayAndTotalSale);
         //  中国地图绘制
         drawChinaMap(-1);
 

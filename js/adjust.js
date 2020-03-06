@@ -30,7 +30,7 @@ window.onload = function () {
         //  请求数据
         function requestCallback(data) {
             console.log(data);
-            console.log(data.yesterdayAndTotalSale);
+            // console.log(data.yesterdayAndTotalSale);
             //  转化格式
             formattingTotalData(data.yesterdayAndTotalSale);
             formattingYesterdayData(data.yesterdayAndTotalSale);
@@ -55,11 +55,11 @@ window.onload = function () {
             //  默认绘制扇形统计图
             pieDiagram1Fn(-1, data.yesterdayAndTotalSale);
             //  中国地图绘制
-            drawChinaMap(1, data.mapAddr);
+            drawChinaMap(-1);
 
             //  冠军楼盘
-            const championVillage = getChampionVillage(1);
-            console.log(championVillage);
+            const championVillage = getChampionVillage(-1);
+            // console.log(championVillage);
             //  省份地图绘制
             drawProvinceMap(getProvinceByVillage(data.mapVillage));
             //  设置省份楼盘的数据

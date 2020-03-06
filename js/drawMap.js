@@ -1,13 +1,11 @@
 //  中国地图绘制
 /**
  * @param:markValue 标记值，-1昨日，1总的
- * @param:data 数据
  * */
-function drawChinaMap(markValue, data) {
-    console.log(data);
+function drawChinaMap(markValue) {
+    // console.log(data);
     //  自绑定一下数据哈
-    data = data || drawChinaMap.data;
-    drawChinaMap.data = data;
+    const data = requestData.mapAddr;
     //  基础数据
     const seriesData = (function () {
         return [{
@@ -187,7 +185,7 @@ function drawChinaMap(markValue, data) {
             }
         })
     });
-    console.log(seriesData);
+    // console.log(seriesData);
     (function () {
         //  颜色配置
         const visualMapColor = [
@@ -259,18 +257,21 @@ function drawChinaMap(markValue, data) {
                     enterable: true,
                     trigger: 'item',
                     formatter: function (params) {
-                        // console.clear();
+                        console.log('弹出formatter');
                         // console.log(params);
                         const villages = params.data.village;
-                        params.data.village[0] = '广州常春藤';
                         if (villages) {
+                            params.data.village[0] = '广州常春藤';
                             // console.log(params.data.village);
                             //  是否 mapChooseVillageName.innerText 对应某个楼盘
                             let hasChooseVillage = false;
+                            //  被染色的那个楼盘名称
+                            let villageName;
                             const arr = villages.map(function (item, index) {
                                 //  如果有对应的，楼盘，设置颜色
                                 if (item === mapChooseVillageName.innerText) {
                                     hasChooseVillage = true;
+                                    villageName = item;
                                     return `<div class="map-tooltip cFF6C78 font10">${item}</div>`;
                                 }
                                 return `<div class="map-tooltip c858081 font10">${item}</div>`;
@@ -278,10 +279,10 @@ function drawChinaMap(markValue, data) {
                             //  如果没有对应楼盘
                             if (!hasChooseVillage) {
                                 arr[0] = `<div class="map-tooltip cFF6C78 font10">${villages[0]}</div>`;
-                                //  被选中的那个小区，应该把这个数据渲染到省份那里
-                                const village = requestData.mapVillage[villages[0]];
-                                console.log(village);
+                                villageName = villages[0];
                             }
+                            console.log(villageName);
+
                             arr.push('<div class="map-tooltip-triangle"></div>');
                             return arr.join('');
                         }
@@ -324,7 +325,7 @@ function drawChinaMap(markValue, data) {
                         {value: 0, label: '无销售'},
                         {min: 1, max: 500, label: '<500万'},
                         {min: 500, max: 1000, label: '500万-1000万'},
-                        {min: 1000, label: '1000万-9000万'},
+                        {min: 1000, label: '1000万以上'},
                     ],
                     selectedMode: 'multiple',
                     color: visualMapColor,
@@ -495,6 +496,7 @@ function getChampionVillage(markValue) {
  * */
 function getVillageRenderData(aimData, originData, markValue) {
     markValue = markValue || -1;
+    // debugger;
     switch (markValue) {
         case -1:
             //  拎包认购数

@@ -5,6 +5,12 @@ function _eventSelectDate(selectCallback) {
     //  日期选择的ul
     const $selectDateUl = $selectDate.find('ul');
     $selectDateUl.on('click', function (e) {
+        // console.log($parent, $parent.data('value'));
+        if (typeof selectCallback === "function") {
+            alert('咩哟这个了');
+            //     selectCallback();
+        }
+
         const $this = $(this);
         const $parent = $this.parent();
         $parent.removeClass('select-date-open');
@@ -13,16 +19,45 @@ function _eventSelectDate(selectCallback) {
         $parent.find('.current-date').text($target.text());
         $this.find('.bg403B3D').removeClass('bg403B3D');
         $target.addClass('bg403B3D');
+        //  获取的值 -1 ：昨天 1：总的
+        const $value = $target.data('value');
         $parent.data('value', $target.data('value'));
-        // console.log($parent, $parent.data('value'));
-        if (typeof selectCallback === "function") {
-            selectCallback();
+
+        const $selectDate = $this.parents('.select-date');
+        console.log($selectDate, $value);
+
+        //  绑定的值得
+        const bindFn = $selectDate.data('bind-fn');
+        //  如果是地图
+        if (bindFn === 'map') {
+            //  中国地图绘制
+            drawChinaMap($value, requestData.mapAddr);
+            //  用于渲染的数据
+            const aimData = {name: mapChooseVillageName.innerText};
+            const ITEM = requestData.mapVillage[mapChooseVillageName.innerText];
+            getVillageRenderData(aimData, ITEM, $value);
+            // console.log(aimData);
+            //  设置省份楼盘的数据
+            _assignmentProvincialRealEstate(aimData);
+            setTimeout(function () {
+                //  这是地图的tip不知道为什么弹起来了
+                $('.map-tooltip').parent('div').hide();
+            }, 0);
+        } else if (bindFn === 'rate') {
+
         }
+
+
     });
     //  日期选择的默认位置
     const $defaultDate = $selectDate.find('.default-date');
     $defaultDate.on('click', function (e) {
-        $(this).parents().addClass('select-date-open');
+        $(this).parent().addClass('select-date-open');
+        //  这是地图的tip不知道为什么弹起来了
+        setTimeout(function () {
+            //  这是地图的tip不知道为什么弹起来了
+            $('.map-tooltip').parent('div').hide();
+        }, 0);
         e.stopPropagation();
     });
 }

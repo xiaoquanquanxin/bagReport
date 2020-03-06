@@ -1,128 +1,125 @@
 window.onload = function () {
-    //  万位
-    // const WAN_DIGIT = 10000;
+    _eventUpwardTriangleButtonClick();
+    _eventSelectDate();
+    _assignmentDate();
+    //  去楼盘详情数据页
     ;(function () {
-        _eventUpwardTriangleButtonClick();
-        _eventSelectDate();
-        _assignmentDate();
-        //  去楼盘详情数据页
-        ;(function () {
-            const $detailData = $('#detailData');
-            $detailData.on('click', function (e) {
-                wxNavigateTo(PageUrlList.housingDetails, {
-                    village: mapChooseVillageName.innerText
-                });
-                e.stopPropagation();
+        const $detailData = $('#detailData');
+        $detailData.on('click', function (e) {
+            wxNavigateTo(PageUrlList.housingDetails, {
+                village: mapChooseVillageName.innerText
             });
-        }());
-
-
-        //  fixme   正式
-        // $.getJSON(APIList.salesSummaryV2, function (result) {
-        //     console.log(result);
-        //     if(result.isSuccess){
-        //         requestCallback(result.data);
-        //     }
-        // });
-        //  fixme   调试
-        requestCallback(mainData);
-
-        //  请求数据
-        function requestCallback(data) {
-            console.log(data);
-            // console.log(data.yesterdayAndTotalSale);
-            //  转化格式
-            formattingTotalData(data.yesterdayAndTotalSale);
-            formattingYesterdayData(data.yesterdayAndTotalSale);
-            Object.keys(data.mapVillage).forEach(function (item) {
-                formattingTotalData(data.mapVillage[item]);
-                formattingYesterdayData(data.mapVillage[item]);
-            });
-            window.requestData = data;
-            // console.log(data);
-            /**
-             * 赋值
-             * */
-
-            _assignmentYesterdaySalesVolume(data.yesterdayAndTotalSale);
-            _assignmentRealEstateOnSale(data.yesterdayAndTotalSale, Object.keys(data.mapVillage).length);
-            _assignmentSalesChampion(data.mapVillage, data.totalTopSales);
-            _assignmentNationalProjects(data.mapVillage);
-            //  上面的折线统计图
-            brokenLineDiagram1Fn();
-
-
-            //  默认绘制扇形统计图
-            pieDiagram1Fn(-1);
-            //  中国地图绘制
-            drawChinaMap(-1);
-
-            //  冠军楼盘
-            const championVillage = getChampionVillage(-1);
-            // console.log(championVillage);
-            //  省份地图绘制
-            drawProvinceMap(getProvinceByVillage(data.mapVillage));
-            //  设置省份楼盘的数据
-            _assignmentProvincialRealEstate(championVillage);
-        }
+            e.stopPropagation();
+        });
     }());
 
-    //  格式化总额
-    function formattingTotalData(data) {
-        //  总合同额
-        data.TotalContract = correctToWan(data.TotalContract || 0);
-        //  总收款额
-        data.TotalReceives = correctToWan(data.TotalReceives || 0);
 
-        //  总家电合同额
-        data.TotalFamilyElectricContract = correctToWan(data.TotalFamilyElectricContract || 0);
-        //  总家电收款额
-        data.TotalFamilyElectricReceives = correctToWan(data.TotalFamilyElectricReceives || 0);
+    //  fixme   正式
+    // $.getJSON(APIList.salesSummaryV2, function (result) {
+    //     console.log(result);
+    //     if(result.isSuccess){
+    //         requestCallback(result.data);
+    //     }
+    // });
+    //  fixme   调试
+    requestCallback(mainData);
 
-        //  总家私合同额
-        data.TotalFamilyPropertyContract = correctToWan(data.TotalFamilyPropertyContract || 0);
-        //  总家私收款额
-        data.TotalFamilyPropertyReceives = correctToWan(data.TotalFamilyPropertyReceives || 0);
+    //  请求数据
+    function requestCallback(data) {
+        console.log(data);
+        // console.log(data.yesterdayAndTotalSale);
+        //  转化格式
+        formattingTotalData(data.yesterdayAndTotalSale);
+        formattingYesterdayData(data.yesterdayAndTotalSale);
+        Object.keys(data.mapVillage).forEach(function (item) {
+            formattingTotalData(data.mapVillage[item]);
+            formattingYesterdayData(data.mapVillage[item]);
+        });
+        window.requestData = data;
+        // console.log(data);
+        /**
+         * 赋值
+         * */
 
-        //  总智家合同额
-        data.TotalSmartHomeContract = correctToWan(data.TotalSmartHomeContract || 0);
-        //  总智家收款额
-        data.TotalSmartHomeReceives = correctToWan(data.TotalSmartHomeReceives || 0);
+        _assignmentYesterdaySalesVolume(data.yesterdayAndTotalSale);
+        _assignmentRealEstateOnSale(data.yesterdayAndTotalSale, Object.keys(data.mapVillage).length);
+        _assignmentSalesChampion(data.mapVillage, data.totalTopSales);
+        _assignmentNationalProjects(data.mapVillage);
+        //  上面的折线统计图
+        brokenLineDiagram1Fn();
 
-        //  总家装合同额
-        data.TotalFamilyDecorationContract = correctToWan(data.TotalFamilyDecorationContract || 0);
-        //  总家装收款额
-        data.TotalFamilyDecorationReceives = correctToWan(data.TotalFamilyDecorationReceives || 0);
+
+        //  默认绘制扇形统计图
+        pieDiagram1Fn(-1);
+        //  中国地图绘制
+        drawChinaMap(-1);
+
+        //  冠军楼盘
+        const championVillage = getChampionVillage(-1);
+        // console.log(championVillage);
+        //  省份地图绘制
+        drawProvinceMap(getProvinceByVillage(data.mapVillage));
+        //  设置省份楼盘的数据
+        _assignmentProvincialRealEstate(championVillage);
     }
 
-    //  格式化昨日额
-    function formattingYesterdayData(data) {
-        //  昨日合同额
-        data.YesterdayContract = correctToWan(data.YesterdayContract || 0);
-        //  昨日收款额
-        data.YesterdayReceives = correctToWan(data.YesterdayReceives || 0);
-
-        //  昨日家电合同额
-        data.YesterdayFamilyElectricContract = correctToWan(data.YesterdayFamilyElectricContract || 0);
-        //  昨日家电收款额
-        data.YesterdayFamilyElectricReceives = correctToWan(data.YesterdayFamilyElectricReceives || 0);
-
-        //  昨日家私合同额
-        data.YesterdayFamilyPropertyContract = correctToWan(data.YesterdayFamilyPropertyContract || 0);
-        //  昨日家私收款额
-        data.YesterdayFamilyPropertyReceives = correctToWan(data.YesterdayFamilyPropertyReceives || 0);
-
-        //  昨日智家合同额
-        data.YesterdaySmartHomeContract = correctToWan(data.YesterdaySmartHomeContract || 0);
-        //  昨日智家收款额
-        data.YesterdaySmartHomeReceives = correctToWan(data.YesterdaySmartHomeReceives || 0);
-
-        //  昨日家装合同额
-        data.YesterdayFamilyDecorationContract = correctToWan(data.YesterdayFamilyDecorationContract || 0);
-        //  昨日家装收款额
-        data.TotalFamilyDecorationReceives = correctToWan(data.TotalFamilyDecorationReceives || 0);
-    }
 };
+
+//  格式化总额
+function formattingTotalData(data) {
+    //  总合同额
+    data.TotalContract = correctToWan(data.TotalContract || 0);
+    //  总收款额
+    data.TotalReceives = correctToWan(data.TotalReceives || 0);
+
+    //  总家电合同额
+    data.TotalFamilyElectricContract = correctToWan(data.TotalFamilyElectricContract || 0);
+    //  总家电收款额
+    data.TotalFamilyElectricReceives = correctToWan(data.TotalFamilyElectricReceives || 0);
+
+    //  总家私合同额
+    data.TotalFamilyPropertyContract = correctToWan(data.TotalFamilyPropertyContract || 0);
+    //  总家私收款额
+    data.TotalFamilyPropertyReceives = correctToWan(data.TotalFamilyPropertyReceives || 0);
+
+    //  总智家合同额
+    data.TotalSmartHomeContract = correctToWan(data.TotalSmartHomeContract || 0);
+    //  总智家收款额
+    data.TotalSmartHomeReceives = correctToWan(data.TotalSmartHomeReceives || 0);
+
+    //  总家装合同额
+    data.TotalFamilyDecorationContract = correctToWan(data.TotalFamilyDecorationContract || 0);
+    //  总家装收款额
+    data.TotalFamilyDecorationReceives = correctToWan(data.TotalFamilyDecorationReceives || 0);
+}
+
+//  格式化昨日额
+function formattingYesterdayData(data) {
+    //  昨日合同额
+    data.YesterdayContract = correctToWan(data.YesterdayContract || 0);
+    //  昨日收款额
+    data.YesterdayReceives = correctToWan(data.YesterdayReceives || 0);
+
+    //  昨日家电合同额
+    data.YesterdayFamilyElectricContract = correctToWan(data.YesterdayFamilyElectricContract || 0);
+    //  昨日家电收款额
+    data.YesterdayFamilyElectricReceives = correctToWan(data.YesterdayFamilyElectricReceives || 0);
+
+    //  昨日家私合同额
+    data.YesterdayFamilyPropertyContract = correctToWan(data.YesterdayFamilyPropertyContract || 0);
+    //  昨日家私收款额
+    data.YesterdayFamilyPropertyReceives = correctToWan(data.YesterdayFamilyPropertyReceives || 0);
+
+    //  昨日智家合同额
+    data.YesterdaySmartHomeContract = correctToWan(data.YesterdaySmartHomeContract || 0);
+    //  昨日智家收款额
+    data.YesterdaySmartHomeReceives = correctToWan(data.YesterdaySmartHomeReceives || 0);
+
+    //  昨日家装合同额
+    data.YesterdayFamilyDecorationContract = correctToWan(data.YesterdayFamilyDecorationContract || 0);
+    //  昨日家装收款额
+    data.TotalFamilyDecorationReceives = correctToWan(data.TotalFamilyDecorationReceives || 0);
+}
 
 //  日期
 function _assignmentDate() {

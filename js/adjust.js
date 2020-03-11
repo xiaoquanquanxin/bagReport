@@ -63,3 +63,5 @@ window.onload = function () {
         _assignmentProvincialRealEstate(championVillage);
     }
 };
+
+
